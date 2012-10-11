@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-
 @end
 
 @implementation PhotoVC
@@ -30,9 +29,8 @@
 
 -(void)loadImage{
     self.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
-    NSLog(@"imageView:%@",self.imageView);
-    NSLog(@"image:%@",self.imageView.image);
-
+//    NSLog(@"imageView:%@",self.imageView);
+//    NSLog(@"image:%@",self.imageView.image);
 }
 
 -(void)prepareImage{
@@ -49,7 +47,6 @@
     float heightZoom = bounds.size.height/image.size.height;
     float widthZoom = bounds.size.width/image.size.width;
     float max = MAX(heightZoom, widthZoom);
-    NSLog(@" heightZoom:%f widthZoom:%f max:%f",heightZoom, widthZoom, max);
     return max;
 }
 

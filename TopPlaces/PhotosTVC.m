@@ -18,6 +18,7 @@
 @implementation PhotosTVC
 @synthesize place = _place;
 
+#pragma mark - Life Cycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,7 +52,30 @@
     
     return cell;
 }
+
 #pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.splitViewController){
+        id vc = [self.splitViewController.viewControllers lastObject];
+        if ([vc isKindOfClass:[PhotoVC class]]){
+            [self prepareVC:vc];
+            [vc loadImage];
+            [vc prepareImage];
+        }
+    }
+}
+
+#pragma mark - Transitions
+
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.destinationViewController isKindOfClass:[PhotoVC class]]){
+        PhotoVC *vc = segue.destinationViewController;
+        [self prepareVC:vc];
+    }
+}
 
 -(PhotoVC*) splitViewPhotoVC{
     id vc = [self.splitViewController.viewControllers lastObject];
@@ -65,21 +89,9 @@
     NSDictionary *photo = [self.tableData objectAtIndex:index.row];
     vc.photo = photo;
     vc.description = [[[self.tableView cellForRowAtIndexPath:index]textLabel]text];
-    [self savePicToRecentlyViewed:photo];
-    [vc loadImage];
-    
+    [self savePicToRecentlyViewed:photo];    
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.splitViewController){
-        id vc = [self.splitViewController.viewControllers lastObject];
-        if ([vc isKindOfClass:[PhotoVC class]]){
-            [self prepareVC:vc];
-            [vc prepareImage];
-        }
-    }
-}
 
 -(void)savePicToRecentlyViewed:(NSDictionary*)photo{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -93,14 +105,6 @@
     }
     [defaults setObject:newRecentlyViewed forKey:@"recentlyViewed"];
     [defaults synchronize];
-}
-
-
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.destinationViewController isKindOfClass:[PhotoVC class]]){
-        PhotoVC *vc = segue.destinationViewController;
-        [self prepareVC:vc];
-    }
 }
 
 @end

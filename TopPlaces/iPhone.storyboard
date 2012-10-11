@@ -138,7 +138,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Q8-aj-eKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1657" y="-486"/>
+            <point key="canvasLocation" x="1661" y="-467"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yAI-P8-sbz">
@@ -208,11 +208,11 @@
             </objects>
             <point key="canvasLocation" x="732" y="275"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Top Places-->
         <scene sceneID="c0S-uo-2gc">
             <objects>
                 <navigationController id="F1w-ug-387" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2Bx-at-abi"/>
+                    <tabBarItem key="tabBarItem" title="Top Places" id="2Bx-at-abi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="q0f-3J-dyS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -227,11 +227,11 @@
             </objects>
             <point key="canvasLocation" x="206" y="-467"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Recently Viewed-->
         <scene sceneID="wRg-s5-Jpq">
             <objects>
                 <navigationController id="cin-Cr-I3A" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="3iE-ZB-yYF"/>
+                    <tabBarItem key="tabBarItem" title="Recently Viewed" id="3iE-ZB-yYF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1q4-Ge-Qd2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

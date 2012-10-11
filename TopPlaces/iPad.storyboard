@@ -161,11 +161,11 @@
             </objects>
             <point key="canvasLocation" x="757" y="-724"/>
         </scene>
-        <!--Split View Controller - Item-->
+        <!--Split View Controller - Top Places-->
         <scene sceneID="nTn-wn-Ech">
             <objects>
                 <splitViewController id="xrm-4d-iS4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="HDD-zy-rbz"/>
+                    <tabBarItem key="tabBarItem" title="Top Places" id="HDD-zy-rbz"/>
                     <toolbarItems/>
                     <connections>
                         <segue destination="roX-2w-hx4" kind="relationship" relationship="masterViewController" id="PKB-pe-NqW"/>
@@ -302,11 +302,11 @@
             </objects>
             <point key="canvasLocation" x="789" y="1068"/>
         </scene>
-        <!--Split View Controller - Item-->
+        <!--Split View Controller - Recently Viewed-->
         <scene sceneID="TeZ-Wk-Sf1">
             <objects>
                 <splitViewController id="HRl-AU-0jk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0dV-9g-KcO"/>
+                    <tabBarItem key="tabBarItem" title="Recently Viewed" id="0dV-9g-KcO"/>
                     <toolbarItems/>
                     <connections>
                         <segue destination="EcX-J8-yyP" kind="relationship" relationship="masterViewController" id="lHP-85-Rux"/>

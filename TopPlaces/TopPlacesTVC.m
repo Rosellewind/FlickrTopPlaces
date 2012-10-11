@@ -16,6 +16,8 @@
 @implementation TopPlacesTVC
 @synthesize tableData;
 
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -25,6 +27,7 @@
 }
 
 #pragma mark - Table view data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.tableData.count;
@@ -44,12 +47,8 @@
     return cell;
 }
 
-#pragma mark - Table view delegate
+#pragma mark - Transitions
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-}
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isKindOfClass:[PhotosTVC class]]){
