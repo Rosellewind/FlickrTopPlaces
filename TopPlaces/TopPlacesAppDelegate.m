@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 class. All rights reserved.
 //
 
-
 #import "TopPlacesAppDelegate.h"
 
 @implementation TopPlacesAppDelegate
