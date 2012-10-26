@@ -80,9 +80,10 @@
     dispatch_async(downloadQueue, ^{
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatSquare]]];
         dispatch_async(dispatch_get_main_queue(), ^{
-            cell.imageView.image = image;
-            [self removeSubviewsFromImageView:cell.imageView];
-
+            if (indexPath.row == [tableView indexPathForCell:cell].row){
+                cell.imageView.image = image;
+                [self removeSubviewsFromImageView:cell.imageView];
+            }
         });
     });
 //    dispatch_release(downloadQueue);
