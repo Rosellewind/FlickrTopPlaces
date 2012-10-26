@@ -21,10 +21,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.clearsSelectionOnViewWillAppear = NO;
+    [self setData];
+}
+
+-(void)setData{
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"_content" ascending:YES];
     self.tableData = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-     self.clearsSelectionOnViewWillAppear = NO;
 }
+
 
 #pragma mark - Table view data source
 

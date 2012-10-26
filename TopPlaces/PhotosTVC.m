@@ -18,11 +18,28 @@
 @implementation PhotosTVC
 @synthesize place = _place;
 
-#pragma mark - Life Cycle
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.tableData = [FlickrFetcher photosInPlace:self.place maxResults:MAX_RESULTS];
+#pragma mark - Set-up
+-(void) showSpinnerInTitle{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.titleView = spinner;
+}
+
+-(void)setData{// called in viewDidLoad
+    //show spinner while getting data
+    [self showSpinnerInTitle];
+    
+    //get data
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr place data downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSArray *photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_RESULTS];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.navigationItem.titleView = NULL;
+            self.tableData = photos;
+            [self.tableView reloadData];
+        });
+    });
+
 }
 
 #pragma mark - Table view data source
@@ -48,21 +65,71 @@
     
     cell.textLabel.text = title;
     cell.detailTextLabel.text = description;
-    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatSquare]]];
+    
+    //set the spinner for image view
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    double circumference = spinner.frame.size.height;
+    spinner.frame = CGRectMake(5, 5, circumference, circumference);
+    [spinner startAnimating];
+    cell.imageView.image = [UIImage imageNamed:@"white 30x30.png"];
+    [self removeSubviewsFromImageView:cell.imageView];
+    [cell.imageView addSubview:spinner];
+    
+    //get the image view
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatSquare]]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.imageView.image = image;
+            [self removeSubviewsFromImageView:cell.imageView];
+
+        });
+    });
+//    dispatch_release(downloadQueue);
+
+    
     
     return cell;
 }
 
+-(void) removeSubviewsFromImageView:(UIImageView*)imageView{
+    NSArray *subviews = [imageView subviews];
+    for (int i = 0; i<subviews.count; i++) {
+        [[subviews objectAtIndex:i]removeFromSuperview];
+    }
+}
+
+/*
+- (IBAction)refresh:(id)sender
+{
+    // might want to use introspection to be sure sender is UIBarButtonItem
+    // (if not, it can skip the spinner)
+    // that way this method can be a little more generic
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSArray *photos = [FlickrFetcher recentGeoreferencedPhotos];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.navigationItem.rightBarButtonItem = sender;
+            self.photos = photos;
+        });
+    });
+    dispatch_release(downloadQueue);
+}
+*/
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"........");
     if (self.splitViewController){
         id vc = [self.splitViewController.viewControllers lastObject];
         if ([vc isKindOfClass:[PhotoVC class]]){
             [self prepareVC:vc];
             [vc loadImage];
-            [vc prepareImage];
         }
     }
 }
@@ -94,17 +161,20 @@
 
 
 -(void)savePicToRecentlyViewed:(NSDictionary*)photo{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *newRecentlyViewed = [NSArray arrayWithObject:photo];
-    NSArray *oldRecentlyViewed = [defaults objectForKey:@"recentlyViewed"];
-    if (oldRecentlyViewed){
-        if ([oldRecentlyViewed containsObject:photo])
-            newRecentlyViewed = oldRecentlyViewed;
-        else
-            newRecentlyViewed = [newRecentlyViewed arrayByAddingObjectsFromArray:oldRecentlyViewed];
-    }
-    [defaults setObject:newRecentlyViewed forKey:@"recentlyViewed"];
-    [defaults synchronize];
+    dispatch_queue_t defaultsQueue = dispatch_queue_create("save to defaults", NULL);
+    dispatch_async(defaultsQueue, ^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSArray *newRecentlyViewed = [NSArray arrayWithObject:photo];
+        NSArray *oldRecentlyViewed = [defaults objectForKey:@"recentlyViewed"];
+        if (oldRecentlyViewed){
+            if ([oldRecentlyViewed containsObject:photo])
+                newRecentlyViewed = oldRecentlyViewed;
+            else
+                newRecentlyViewed = [newRecentlyViewed arrayByAddingObjectsFromArray:oldRecentlyViewed];
+        }
+        [defaults setObject:newRecentlyViewed forKey:@"recentlyViewed"];
+        [defaults synchronize];
+    });
 }
 
 @end

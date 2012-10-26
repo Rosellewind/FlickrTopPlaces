@@ -106,19 +106,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MtD-LA-rGa">
-                                <rect key="frame" x="0.0" y="434" width="320" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" minimumZoomScale="0.20000000000000001" maximumZoomScale="2.5" id="DLO-Ml-V2k">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="435"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="center" id="A2u-ON-feh">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="435"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -126,6 +119,11 @@
                                     <outlet property="delegate" destination="43W-FF-3Ir" id="Rx1-A0-D1M"/>
                                 </connections>
                             </scrollView>
+                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="uNa-OY-qrb">
+                                <rect key="frame" x="141" y="160" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="color" red="0.65921226629999996" green="0.81269106660000001" blue="0.78376048549999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -133,7 +131,7 @@
                     <connections>
                         <outlet property="imageView" destination="A2u-ON-feh" id="jOn-OQ-PVD"/>
                         <outlet property="scrollView" destination="DLO-Ml-V2k" id="rEi-KX-s32"/>
-                        <outlet property="titleLabel" destination="MtD-LA-rGa" id="lWK-il-Pf9"/>
+                        <outlet property="spinner" destination="uNa-OY-qrb" id="JRj-V2-CNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Q8-aj-eKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -254,19 +252,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G0j-9V-oTz">
-                                <rect key="frame" x="0.0" y="434" width="320" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" minimumZoomScale="0.20000000298023224" maximumZoomScale="2" id="zZa-SU-z4h">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="435"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="center" id="7DD-jl-xbf">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="435"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -274,6 +265,11 @@
                                     <outlet property="delegate" destination="R5c-6L-nNS" id="k4P-Br-UsZ"/>
                                 </connections>
                             </scrollView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="0AS-35-i4s">
+                                <rect key="frame" x="141" y="160" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="color" red="0.65921226629999996" green="0.81269106660000001" blue="0.78376048549999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -281,7 +277,7 @@
                     <connections>
                         <outlet property="imageView" destination="7DD-jl-xbf" id="3eb-61-Hau"/>
                         <outlet property="scrollView" destination="zZa-SU-z4h" id="rmx-4E-ZtS"/>
-                        <outlet property="titleLabel" destination="G0j-9V-oTz" id="4Ru-y2-snx"/>
+                        <outlet property="spinner" destination="0AS-35-i4s" id="Vjg-4v-FXV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ecj-PP-0Wo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -289,6 +285,26 @@
             <point key="canvasLocation" x="1201" y="275"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="PhotoVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="PhotosTVC" superclassName="TopPlacesTVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTVC.h"/>
+        </class>
+        <class className="RecentPhotosTVC" superclassName="PhotosTVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotosTVC.h"/>
+        </class>
+        <class className="TopPlacesTVC" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTVC.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -15,17 +15,11 @@
                             <view contentMode="scaleToFill" id="Mcp-p6-KnW">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="955"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l4L-aq-3lG">
-                                        <rect key="frame" x="0.0" y="921" width="768" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" minimumZoomScale="0.20000000298023224" maximumZoomScale="2" id="KgR-8d-RoT">
-                                        <rect key="frame" x="0.0" y="44" width="768" height="880"/>
+                                        <rect key="frame" x="0.0" y="44" width="768" height="911"/>
                                         <subviews>
                                             <imageView multipleTouchEnabled="YES" contentMode="center" id="b3i-Yt-SKq">
-                                                <rect key="frame" x="0.0" y="0.0" width="768" height="880"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="768" height="911"/>
                                             </imageView>
                                         </subviews>
                                         <connections>
@@ -37,6 +31,11 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <items/>
                                     </toolbar>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="X0D-Yo-KEL">
+                                        <rect key="frame" x="365" y="459" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="color" red="0.65921226629999996" green="0.81269106660000001" blue="0.78376048549999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -47,7 +46,7 @@
                     <connections>
                         <outlet property="imageView" destination="b3i-Yt-SKq" id="WGX-GZ-jvg"/>
                         <outlet property="scrollView" destination="KgR-8d-RoT" id="KBk-CH-EjU"/>
-                        <outlet property="titleLabel" destination="l4L-aq-3lG" id="NBC-hQ-iJ8"/>
+                        <outlet property="spinner" destination="X0D-Yo-KEL" id="oqn-J4-lAR"/>
                         <outlet property="toolbar" destination="PMH-gb-eya" id="L1m-n2-Qu2"/>
                     </connections>
                 </viewController>
@@ -208,19 +207,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items/>
                             </toolbar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="emV-kW-3S8">
-                                <rect key="frame" x="0.0" y="921" width="768" height="34"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="center" minimumZoomScale="0.20000000000000001" maximumZoomScale="2.5" id="nWI-tZ-bDu">
-                                <rect key="frame" x="0.0" y="44" width="768" height="880"/>
+                                <rect key="frame" x="0.0" y="44" width="768" height="911"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="center" id="Vw4-rc-IcY">
-                                        <rect key="frame" x="0.0" y="0.0" width="768" height="880"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="911"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -228,6 +220,11 @@
                                     <outlet property="delegate" destination="xbq-ar-EaV" id="s7n-GZ-Pmy"/>
                                 </connections>
                             </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="hcw-Ut-nHk">
+                                <rect key="frame" x="365" y="459" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="color" red="0.65921226629999996" green="0.81269106660000001" blue="0.78376048549999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -235,7 +232,7 @@
                     <connections>
                         <outlet property="imageView" destination="Vw4-rc-IcY" id="fL3-sK-7e4"/>
                         <outlet property="scrollView" destination="nWI-tZ-bDu" id="OQY-zV-1A5"/>
-                        <outlet property="titleLabel" destination="emV-kW-3S8" id="5Nj-iC-dqd"/>
+                        <outlet property="spinner" destination="hcw-Ut-nHk" id="UT7-ai-eUO"/>
                         <outlet property="toolbar" destination="MvC-gf-ywi" id="vPx-ck-LZ4"/>
                     </connections>
                 </viewController>
@@ -324,7 +321,7 @@
             <relationships>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>

@@ -12,25 +12,39 @@
 
 @interface PhotoVC()<UIScrollViewDelegate, UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation PhotoVC
 @synthesize photo = _photo;
 @synthesize description = _description;
+
 @synthesize imageView = _imageView;
-@synthesize titleLabel = _titleLabel;
 @synthesize scrollView = _scrollView;
+@synthesize toolbar = _toolbar;
+@synthesize spinner = _spinner;
+
 @synthesize buttonDancerbbi = _buttonDancerbbi;
 
 #pragma mark - Image Methods
 
 -(void)loadImage{
-    self.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
-//    NSLog(@"imageView:%@",self.imageView);
-//    NSLog(@"image:%@",self.imageView.image);
+    //show spinner while getting photo
+    [self.spinner startAnimating];
+    
+    //get photo
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.spinner stopAnimating];
+            self.imageView.image = image;
+            [self prepareImage];
+        });
+    });
 }
 
 -(void)prepareImage{
@@ -55,11 +69,12 @@
 {
     if (!self.splitViewController)[self loadImage];
     [super viewDidLoad];
-    self.titleLabel.text = self.description;
+    self.navigationItem.title = self.description;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    if (!self.splitViewController)[self prepareImage];
+    [super viewWillAppear:animated];
+//    if (!self.splitViewController)[self prepareImage];
 }
 
 -(void) awakeFromNib{

@@ -13,12 +13,16 @@
 
 @implementation RecentPhotosTVC
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+#pragma mark - Set-up
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.tableData = [defaults objectForKey:@"recentlyViewed"];
+-(void)setData{// called in viewDidLoad
+    dispatch_queue_t fromDefaults = dispatch_queue_create("data from defaults", NULL);
+    dispatch_async(fromDefaults, ^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        self.tableData = [defaults objectForKey:@"recentlyViewed"];
+        [self.tableView reloadData];
+    });
+
 }
 
 @end
