@@ -10,7 +10,7 @@
 #import "FlickrFetcher.h"
 #import "PhotoVC.h"
 
-#define MAX_RESULTS 2
+#define MAX_RESULTS 50
 
 @interface PhotosTVC ()
 @end
@@ -18,28 +18,30 @@
 @implementation PhotosTVC
 @synthesize place = _place;
 
-#pragma mark - Set-up
--(void) showSpinnerInTitle{
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner startAnimating];
-    self.navigationItem.titleView = spinner;
-}
+
+#pragma mark - Data
 
 -(void)setData{// called in viewDidLoad
     //show spinner while getting data
-    [self showSpinnerInTitle];
+    [self showSpinnerInToolBar];
     
     //get data
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr place data downloader", NULL);
     dispatch_async(downloadQueue, ^{
         NSArray *photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_RESULTS];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.navigationItem.titleView = NULL;
-            self.tableData = photos;
-            [self.tableView reloadData];
+            self.navigationItem.rightBarButtonItem = self.refreshButton;
+            if (![photos isEqualToArray:self.tableData]) {
+                self.tableData = photos;
+                [self.tableView reloadData];
+            }
         });
     });
 
+}
+
+- (IBAction)refresh:(id)sender {
+    [self setData];
 }
 
 #pragma mark - Table view data source
@@ -125,7 +127,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"........");
     if (self.splitViewController){
         id vc = [self.splitViewController.viewControllers lastObject];
         if ([vc isKindOfClass:[PhotoVC class]]){
@@ -155,9 +156,9 @@
 -(void)prepareVC:(PhotoVC*)vc{
     NSIndexPath *index= [self.tableView indexPathForSelectedRow];
     NSDictionary *photo = [self.tableData objectAtIndex:index.row];
+    [self savePicToRecentlyViewed:photo];
     vc.photo = photo;
     vc.description = [[[self.tableView cellForRowAtIndexPath:index]textLabel]text];
-    [self savePicToRecentlyViewed:photo];    
 }
 
 
@@ -165,16 +166,20 @@
     dispatch_queue_t defaultsQueue = dispatch_queue_create("save to defaults", NULL);
     dispatch_async(defaultsQueue, ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSArray *newRecentlyViewed = [NSArray arrayWithObject:photo];
-        NSArray *oldRecentlyViewed = [defaults objectForKey:@"recentlyViewed"];
-        if (oldRecentlyViewed){
-            if ([oldRecentlyViewed containsObject:photo])
-                newRecentlyViewed = oldRecentlyViewed;
-            else
-                newRecentlyViewed = [newRecentlyViewed arrayByAddingObjectsFromArray:oldRecentlyViewed];
+        NSMutableArray *recentlyViewed = [[defaults objectForKey:@"recentlyViewed"] mutableCopy];
+        if (recentlyViewed){
+            NSUInteger index = [recentlyViewed indexOfObject:photo];
+            if (index != NSNotFound)//swap places............
+                [recentlyViewed exchangeObjectAtIndex:0 withObjectAtIndex:[recentlyViewed indexOfObject:photo]];
+            else{
+                [recentlyViewed insertObject:photo atIndex:0];
+                if (recentlyViewed.count > 100) {
+                    recentlyViewed = [[recentlyViewed subarrayWithRange:NSMakeRange(0, 89)]mutableCopy];
+                }
+            }
+            [defaults setObject:recentlyViewed forKey:@"recentlyViewed"];
+            [defaults synchronize];
         }
-        [defaults setObject:newRecentlyViewed forKey:@"recentlyViewed"];
-        [defaults synchronize];
     });
 }
 

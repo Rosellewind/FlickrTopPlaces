@@ -45,7 +45,16 @@
                             <outlet property="delegate" destination="HU1-eB-s8A" id="CLD-Lj-8UA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Top Places" id="A7m-gu-A4T"/>
+                    <navigationItem key="navigationItem" title="Top Places" id="A7m-gu-A4T">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="oIX-ax-NmH">
+                            <connections>
+                                <action selector="refresh:" destination="HU1-eB-s8A" id="1DV-ep-rMY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="oIX-ax-NmH" id="cGf-IQ-n4D"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44o-T3-29g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,7 +101,16 @@
                             <outlet property="delegate" destination="f4h-Yl-tUu" id="s9B-ca-yS2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pictures" id="IvL-Pg-u5b"/>
+                    <navigationItem key="navigationItem" title="Pictures" id="IvL-Pg-u5b">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="G2U-Me-BHg">
+                            <connections>
+                                <action selector="refresh:" destination="f4h-Yl-tUu" id="tm5-mE-kcS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="G2U-Me-BHg" id="lty-HH-vTe"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tPo-vs-436" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -157,7 +175,7 @@
             </objects>
             <point key="canvasLocation" x="-328" y="-40"/>
         </scene>
-        <!--Recent PhotosTVC - Recently Viewed Pictures-->
+        <!--Recent PhotosTVC - Recently Viewed-->
         <scene sceneID="doE-45-tVr">
             <objects>
                 <tableViewController id="HzR-Lz-LQD" customClass="RecentPhotosTVC" sceneMemberID="viewController">
@@ -200,7 +218,7 @@
                             <outlet property="delegate" destination="HzR-Lz-LQD" id="zFN-V0-a02"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recently Viewed Pictures" id="to0-3C-gfF"/>
+                    <navigationItem key="navigationItem" title="Recently Viewed" id="to0-3C-gfF"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bN-ox-rzX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -297,12 +315,18 @@
         </class>
         <class className="PhotosTVC" superclassName="TopPlacesTVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="RecentPhotosTVC" superclassName="PhotosTVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotosTVC.h"/>
         </class>
         <class className="TopPlacesTVC" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

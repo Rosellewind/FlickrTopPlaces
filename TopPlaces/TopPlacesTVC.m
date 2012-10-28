@@ -9,6 +9,7 @@
 #import "TopPlacesTVC.h"
 #import "FlickrFetcher.h"
 #import "PhotosTVC.h"
+#import "RecentPhotosTVC.h"
 
 @interface TopPlacesTVC ()
 @end
@@ -25,11 +26,36 @@
     [self setData];
 }
 
--(void)setData{
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"_content" ascending:YES];
-    self.tableData = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+#pragma mark - Data
+- (IBAction)refresh:(id)sender {
+    [self setData];
 }
 
+-(void)setData{
+    //show spinner while getting data
+    [self showSpinnerInToolBar];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr places data downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"_content" ascending:YES];
+        NSArray *places = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.navigationItem.rightBarButtonItem = self.refreshButton;
+            if (![places isEqualToArray:self.tableData]){
+                self.tableData = places;
+                [self.tableView reloadData];
+            }
+        });
+    });
+}
+
+
+-(void) showSpinnerInToolBar{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc]initWithCustomView:spinner];
+    self.navigationItem.rightBarButtonItem = bbi;
+}
 
 #pragma mark - Table view data source
 

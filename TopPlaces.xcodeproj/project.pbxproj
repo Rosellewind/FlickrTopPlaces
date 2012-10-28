@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D0EB816163B0C1100AFE7B5 /* white 30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0EB815163B0C1000AFE7B5 /* white 30x30.png */; };
+		3D923D7C163CBFF9003A2B2F /* Cacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D923D7B163CBFF9003A2B2F /* Cacher.m */; };
 		3DD423CF1624EC3F005E91E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423CE1624EC3F005E91E7 /* UIKit.framework */; };
 		3DD423D11624EC3F005E91E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423D01624EC3F005E91E7 /* Foundation.framework */; };
 		3DD423D31624EC3F005E91E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423D21624EC3F005E91E7 /* CoreGraphics.framework */; };
@@ -29,6 +30,8 @@
 /* Begin PBXFileReference section */
 		3D0EB815163B0C1000AFE7B5 /* white 30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white 30x30.png"; sourceTree = "<group>"; };
 		3D1E0F1816260E6E00CF135B /* ButtonDancer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonDancer.h; sourceTree = "<group>"; };
+		3D923D7A163CBFF9003A2B2F /* Cacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
+		3D923D7B163CBFF9003A2B2F /* Cacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cacher.m; sourceTree = "<group>"; };
 		3DD423CA1624EC3F005E91E7 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD423CE1624EC3F005E91E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DD423D01624EC3F005E91E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,6 +121,8 @@
 				3DD424051624F2B1005E91E7 /* FlickrAPIKey.h */,
 				3DD423FC1624EF1E005E91E7 /* FlickrFetcher.h */,
 				3DD423FD1624EF1E005E91E7 /* FlickrFetcher.m */,
+				3D923D7A163CBFF9003A2B2F /* Cacher.h */,
+				3D923D7B163CBFF9003A2B2F /* Cacher.m */,
 				3DD423D51624EC3F005E91E7 /* Supporting Files */,
 			);
 			path = TopPlaces;
@@ -213,6 +218,7 @@
 				3DD423DB1624EC40005E91E7 /* main.m in Sources */,
 				3DD423DF1624EC40005E91E7 /* TopPlacesAppDelegate.m in Sources */,
 				3DD423FE1624EF1E005E91E7 /* FlickrFetcher.m in Sources */,
+				3D923D7C163CBFF9003A2B2F /* Cacher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +293,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
 				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -298,6 +305,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
 				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

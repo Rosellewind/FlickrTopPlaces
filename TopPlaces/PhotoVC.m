@@ -9,12 +9,14 @@
 #import "PhotoVC.h"
 #import "FlickrFetcher.h"
 #import "ButtonDancer.h"
+#import "Cacher.h"
 
 @interface PhotoVC()<UIScrollViewDelegate, UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) NSMutableArray *cachedPhotos;
 
 @end
 
@@ -26,25 +28,47 @@
 @synthesize scrollView = _scrollView;
 @synthesize toolbar = _toolbar;
 @synthesize spinner = _spinner;
+@synthesize cachedPhotos = _cachedPhotos;
 
 @synthesize buttonDancerbbi = _buttonDancerbbi;
 
 #pragma mark - Image Methods
 
 -(void)loadImage{
+    NSString *key = [self.photo objectForKey:@"id"];
+    
     //show spinner while getting photo
     [self.spinner startAnimating];
     
-    //get photo
-    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image downloader", NULL);
-    dispatch_async(downloadQueue, ^{
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.spinner stopAnimating];
-            self.imageView.image = image;
-            [self prepareImage];
+    //check to see if photo is cached
+    UIImage *cachedImage = [Cacher cachedImageForKey:key];
+    if (cachedImage){
+        [self.spinner stopAnimating];
+        self.imageView.image = cachedImage;
+        [self prepareImage];
+    }
+    else {
+        //get photo
+        dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //--------add if still same photo for ipad
+                [self.spinner stopAnimating];
+                self.imageView.image = image;
+                [self prepareImage];
+            });
+            [self.cachedPhotos insertObject:key atIndex:0];
+            if ([Cacher isOverLimit]){
+                [Cacher removeCacheForKey:[self.cachedPhotos lastObject]];
+                [self.cachedPhotos removeLastObject];
+            }
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:self.cachedPhotos forKey:@"cachedPhotos"];
+            [defaults synchronize];
+            [Cacher cacheImage:image withKey:key];
         });
-    });
+    }
 }
 
 -(void)prepareImage{
@@ -70,6 +94,9 @@
     if (!self.splitViewController)[self loadImage];
     [super viewDidLoad];
     self.navigationItem.title = self.description;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.cachedPhotos = [[defaults arrayForKey:@"cachedPhotos"]mutableCopy];
+    if (!self.cachedPhotos) self.cachedPhotos = [[NSMutableArray alloc]init];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

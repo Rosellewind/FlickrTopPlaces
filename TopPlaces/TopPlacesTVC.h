@@ -10,5 +10,7 @@
 
 @interface TopPlacesTVC : UITableViewController
 @property (nonatomic, strong) NSArray *tableData;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 
+-(void) showSpinnerInToolBar;
 @end
