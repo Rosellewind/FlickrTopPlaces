@@ -21,7 +21,6 @@
 @property (weak, nonatomic) id <MapDelegate> mapDelegate;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) NSArray *annotations;
 -(void) showSpinnerInToolBar;
 - (IBAction)choseView:(UISegmentedControl *)sender;
 - (IBAction)refresh:(id)sender;

@@ -16,11 +16,11 @@
 @end
 
 @implementation TopPlacesTVC
-@synthesize tableData;
+@synthesize tableData = _tableData;
 @synthesize tableView = _tableView;
 @synthesize mapView = _mapView;
-@synthesize annotations = _annotations;//delete//////////
 @synthesize mapDelegate = _mapDelegate;
+
 #pragma mark - Getters and Setters
 
 -(void) setMapView:(MKMapView *)mapView{
@@ -31,18 +31,17 @@
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(15.623037,-38.320312), 10000000, 10000000) animated:YES];
     [self updateMapView];
 }
--(void) setAnnotations:(NSArray *)annotations{
-    _annotations = annotations;
-    [self updateMapView];
+-(void) setTableData:(NSArray *)tableData{
+    _tableData = tableData;
+    [self.tableView reloadData];
+    [self updateMapView];//every time? ipad?
 }
-
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.clearsSelectionOnViewWillAppear = NO;
     [self setData];
 }
 
@@ -61,10 +60,8 @@
         NSArray *places = [[FlickrFetcher topPlaces] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem = self.refreshButton;
-            if (![places isEqualToArray:self.tableData]){
+            if (![places isEqualToArray:self.tableData])
                 self.tableData = places;
-                [self.tableView reloadData];
-            }
         });
     });
 }
@@ -101,53 +98,27 @@
 #pragma mark - Map View
 
 -(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    NSLog(@"viewForAnnotation");
     MKAnnotationView *annView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"annView"];
     if (!annView){
         annView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"annView"];
         annView.canShowCallout = YES;
-        annView.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        annView.rightCalloutAccessoryView = [UIButton buttonWithType: UIButtonTypeDetailDisclosure];
     }
     else annView.annotation = annotation;
-    [(UIImageView*)annView.leftCalloutAccessoryView setImage:nil];
     return annView;
-}
-
--(void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
-    NSLog(@"didSelectAnnotationView");
-
-    dispatch_queue_t downloadQueue = dispatch_queue_create("annotation image downloader", NULL);
-    dispatch_async(downloadQueue, ^{
-        UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
-        if ([mapView.selectedAnnotations containsObject:view]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [(UIImageView*)view.leftCalloutAccessoryView setImage:image];
-            });
-        }
-    });
 }
  
 -(void) updateMapView{
-    NSLog(@"updateMapView");
     if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
     if (self.tableData) [self.mapView addAnnotations:[self mapAnnotations]];
 }
 
 -(NSArray*) mapAnnotations{
     NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:self.tableData.count];
-    for (NSDictionary *photo in self.tableData){
-        [annotations addObject:[FlickrPhotoAnnotation annotationForPhoto:photo]];
+    for (NSDictionary *place in self.tableData){
+        [annotations addObject:[FlickrPhotoAnnotation annotationForPlace:place]];
     }
     return annotations;
-}
-
-#pragma mark - MapDelegate
--(UIImage*) viewController:(TopPlacesTVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{
-    NSLog(@"imageForAnnotation");
-    FlickrPhotoAnnotation *ann = (FlickrPhotoAnnotation*)annotation;
-    NSURL *photoURL = [FlickrFetcher urlForPhoto:ann.photo format:FlickrPhotoFormatSquare];
-    NSData *data = [NSData dataWithContentsOfURL:photoURL];
-    return data ? [UIImage imageWithData:data] : nil;
 }
 
 #pragma mark - Transitions
