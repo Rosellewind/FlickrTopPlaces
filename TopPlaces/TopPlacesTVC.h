@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopPlacesTVC : UITableViewController
+@interface TopPlacesTVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *tableData;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 -(void) showSpinnerInToolBar;
 @end

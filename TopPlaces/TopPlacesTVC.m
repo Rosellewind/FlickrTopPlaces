@@ -16,13 +16,14 @@
 
 @implementation TopPlacesTVC
 @synthesize tableData;
+@synthesize tableView;
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.clearsSelectionOnViewWillAppear = NO;
+//    self.tableView.clearsSelectionOnViewWillAppear = NO;
     [self setData];
 }
 
