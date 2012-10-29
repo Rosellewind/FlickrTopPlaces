@@ -125,13 +125,9 @@
 
 -(void)savePicToRecentlyViewed:(NSDictionary*)photo{
     dispatch_queue_t defaultsQueue = dispatch_queue_create("save to defaults", NULL);
-    NSLog(@"defaultsQueue:%@", defaultsQueue);
     dispatch_async(defaultsQueue, ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSLog(@"defaults:%@", defaults);
-
         NSMutableArray *recentlyViewed = [[defaults objectForKey:@"recentlyViewed"] mutableCopy];
-        NSLog(@"recentlyViewed:%@", recentlyViewed);
         if(!recentlyViewed) recentlyViewed = [[NSMutableArray alloc]init];
         NSUInteger index = [recentlyViewed indexOfObject:photo];
         if (index != NSNotFound)//swap places............
@@ -144,7 +140,6 @@
         }
         [defaults setObject:recentlyViewed forKey:@"recentlyViewed"];
         [defaults synchronize];
-        NSLog(@"recentlyViewed:%@",recentlyViewed);
     });
 }
 

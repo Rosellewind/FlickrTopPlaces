@@ -10,20 +10,39 @@
 #import "FlickrFetcher.h"
 #import "PhotosTVC.h"
 #import "RecentPhotosTVC.h"
+#import "FlickrPhotoAnnotation.h"
 
 @interface TopPlacesTVC ()
 @end
 
 @implementation TopPlacesTVC
 @synthesize tableData;
-@synthesize tableView;
+@synthesize tableView = _tableView;
+@synthesize mapView = _mapView;
+@synthesize annotations = _annotations;//delete//////////
+@synthesize mapDelegate = _mapDelegate;
+#pragma mark - Getters and Setters
+
+-(void) setMapView:(MKMapView *)mapView{
+    _mapView = mapView;
+    mapView.delegate = self;
+    self.mapDelegate = self;
+    self.mapView.mapType = MKMapTypeHybrid;
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(15.623037,-38.320312), 10000000, 10000000) animated:YES];
+    [self updateMapView];
+}
+-(void) setAnnotations:(NSArray *)annotations{
+    _annotations = annotations;
+    [self updateMapView];
+}
+
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.tableView.clearsSelectionOnViewWillAppear = NO;
+//    self.clearsSelectionOnViewWillAppear = NO;
     [self setData];
 }
 
@@ -79,8 +98,69 @@
     return cell;
 }
 
+#pragma mark - Map View
+
+-(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    NSLog(@"viewForAnnotation");
+    MKAnnotationView *annView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"annView"];
+    if (!annView){
+        annView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"annView"];
+        annView.canShowCallout = YES;
+        annView.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    }
+    else annView.annotation = annotation;
+    [(UIImageView*)annView.leftCalloutAccessoryView setImage:nil];
+    return annView;
+}
+
+-(void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+    NSLog(@"didSelectAnnotationView");
+
+    dispatch_queue_t downloadQueue = dispatch_queue_create("annotation image downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
+        if ([mapView.selectedAnnotations containsObject:view]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [(UIImageView*)view.leftCalloutAccessoryView setImage:image];
+            });
+        }
+    });
+}
+ 
+-(void) updateMapView{
+    NSLog(@"updateMapView");
+    if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
+    if (self.tableData) [self.mapView addAnnotations:[self mapAnnotations]];
+}
+
+-(NSArray*) mapAnnotations{
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:self.tableData.count];
+    for (NSDictionary *photo in self.tableData){
+        [annotations addObject:[FlickrPhotoAnnotation annotationForPhoto:photo]];
+    }
+    return annotations;
+}
+
+#pragma mark - MapDelegate
+-(UIImage*) viewController:(TopPlacesTVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{
+    NSLog(@"imageForAnnotation");
+    FlickrPhotoAnnotation *ann = (FlickrPhotoAnnotation*)annotation;
+    NSURL *photoURL = [FlickrFetcher urlForPhoto:ann.photo format:FlickrPhotoFormatSquare];
+    NSData *data = [NSData dataWithContentsOfURL:photoURL];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
 #pragma mark - Transitions
 
+- (IBAction)choseView:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        [UIView transitionFromView:self.mapView toView:self.tableView duration:.7 options:UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionCurveEaseIn completion:nil];
+    }
+    else{
+        [self updateMapView];
+        [UIView transitionFromView:self.tableView toView:self.mapView duration:.7 options:UIViewAnimationOptionShowHideTransitionViews | UIViewAnimationOptionTransitionFlipFromRight | UIViewAnimationOptionCurveEaseIn completion:nil];
+    }
+}
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isKindOfClass:[PhotosTVC class]]){

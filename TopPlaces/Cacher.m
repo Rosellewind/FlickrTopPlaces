@@ -35,7 +35,6 @@
 
 +(BOOL)isOverLimit{
     NSFileManager *manager = [[NSFileManager alloc]init];
-    NSLog(@"fileSize:%llu",[[manager attributesOfItemAtPath:[self urlForKey:@""].path error:nil]fileSize]);
     if ([[manager attributesOfItemAtPath:[self urlForKey:@""].path error:nil]fileSize] > MB_TO_BYTE(10))
         return YES;
     else return NO;

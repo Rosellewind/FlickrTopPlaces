@@ -33,10 +33,8 @@
                 self.tableData = recent;
                 [self.tableView reloadData];
             }
-                       NSLog(@"self.tableData:%@", self.tableData);
         });
     });
-    NSLog(@"self.tableData:%@", self.tableData);
 }
 
 @end
