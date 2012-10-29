@@ -53,7 +53,6 @@
         dispatch_async(downloadQueue, ^{
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                //--------add if still same photo for ipad
                 [self.spinner stopAnimating];
                 self.imageView.image = image;
                 [self prepareImage];

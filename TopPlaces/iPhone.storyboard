@@ -12,6 +12,14 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <segmentedControl key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="I0c-Jp-P9g">
+                            <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="places" textLabel="zoU-P6-GF2" detailTextLabel="96A-m7-21G" style="IBUITableViewCellStyleSubtitle" id="75y-dz-rTU">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -58,7 +66,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44o-T3-29g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="732" y="-467"/>
+            <point key="canvasLocation" x="771" y="-467"/>
         </scene>
         <!--PhotosTVC - Pictures-->
         <scene sceneID="ioV-xT-SFn">
@@ -236,7 +244,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HU1-eB-s8A" kind="relationship" relationship="rootViewController" id="GXl-zU-a17"/>
+                        <segue destination="HU1-eB-s8A" kind="relationship" relationship="rootViewController" id="z6j-Vq-Gw4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jjU-AP-Zm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -316,6 +324,7 @@
         <class className="PhotosTVC" superclassName="TopPlacesTVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTVC.h"/>
             <relationships>
+                <relationship kind="action" name="refresh:"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
@@ -325,6 +334,7 @@
         <class className="TopPlacesTVC" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTVC.h"/>
             <relationships>
+                <relationship kind="action" name="refresh:"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>

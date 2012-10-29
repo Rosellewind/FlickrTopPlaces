@@ -68,15 +68,9 @@
     cell.textLabel.text = title;
     cell.detailTextLabel.text = description;
     
-    //set the spinner for image view
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    double circumference = spinner.frame.size.height;
-    spinner.frame = CGRectMake(5, 5, circumference, circumference);
-    [spinner startAnimating];
+
     cell.imageView.image = [UIImage imageNamed:@"white 30x30.png"];
-    [self removeSubviewsFromImageView:cell.imageView];
-    [cell.imageView addSubview:spinner];
-    
+
     //get the image view
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
@@ -84,45 +78,12 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (indexPath.row == [tableView indexPathForCell:cell].row){
                 cell.imageView.image = image;
-                [self removeSubviewsFromImageView:cell.imageView];
             }
         });
     });
-//    dispatch_release(downloadQueue);
-
-    
-    
     return cell;
 }
 
--(void) removeSubviewsFromImageView:(UIImageView*)imageView{
-    NSArray *subviews = [imageView subviews];
-    for (int i = 0; i<subviews.count; i++) {
-        [[subviews objectAtIndex:i]removeFromSuperview];
-    }
-}
-
-/*
-- (IBAction)refresh:(id)sender
-{
-    // might want to use introspection to be sure sender is UIBarButtonItem
-    // (if not, it can skip the spinner)
-    // that way this method can be a little more generic
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    
-    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
-    dispatch_async(downloadQueue, ^{
-        NSArray *photos = [FlickrFetcher recentGeoreferencedPhotos];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.navigationItem.rightBarButtonItem = sender;
-            self.photos = photos;
-        });
-    });
-    dispatch_release(downloadQueue);
-}
-*/
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,22 +125,26 @@
 
 -(void)savePicToRecentlyViewed:(NSDictionary*)photo{
     dispatch_queue_t defaultsQueue = dispatch_queue_create("save to defaults", NULL);
+    NSLog(@"defaultsQueue:%@", defaultsQueue);
     dispatch_async(defaultsQueue, ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSLog(@"defaults:%@", defaults);
+
         NSMutableArray *recentlyViewed = [[defaults objectForKey:@"recentlyViewed"] mutableCopy];
-        if (recentlyViewed){
-            NSUInteger index = [recentlyViewed indexOfObject:photo];
-            if (index != NSNotFound)//swap places............
-                [recentlyViewed exchangeObjectAtIndex:0 withObjectAtIndex:[recentlyViewed indexOfObject:photo]];
-            else{
-                [recentlyViewed insertObject:photo atIndex:0];
-                if (recentlyViewed.count > 100) {
-                    recentlyViewed = [[recentlyViewed subarrayWithRange:NSMakeRange(0, 89)]mutableCopy];
-                }
+        NSLog(@"recentlyViewed:%@", recentlyViewed);
+        if(!recentlyViewed) recentlyViewed = [[NSMutableArray alloc]init];
+        NSUInteger index = [recentlyViewed indexOfObject:photo];
+        if (index != NSNotFound)//swap places............
+            [recentlyViewed exchangeObjectAtIndex:0 withObjectAtIndex:[recentlyViewed indexOfObject:photo]];
+        else{
+            [recentlyViewed insertObject:photo atIndex:0];
+            if (recentlyViewed.count > 20) {
+                recentlyViewed = [[recentlyViewed subarrayWithRange:NSMakeRange(0, 19)]mutableCopy];
             }
-            [defaults setObject:recentlyViewed forKey:@"recentlyViewed"];
-            [defaults synchronize];
         }
+        [defaults setObject:recentlyViewed forKey:@"recentlyViewed"];
+        [defaults synchronize];
+        NSLog(@"recentlyViewed:%@",recentlyViewed);
     });
 }
 

@@ -198,18 +198,13 @@
         <scene sceneID="dfW-wx-hwd">
             <objects>
                 <viewController title="Picture" id="xbq-ar-EaV" customClass="PhotoVC" sceneMemberID="viewController">
-                    <view key="view" contentMode="TopLeft" id="VlO-qn-LFE">
+                    <view key="view" contentMode="scaleToFill" id="VlO-qn-LFE">
                         <rect key="frame" x="0.0" y="20" width="768" height="955"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="MvC-gf-ywi">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items/>
-                            </toolbar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="center" minimumZoomScale="0.20000000000000001" maximumZoomScale="2.5" id="nWI-tZ-bDu">
-                                <rect key="frame" x="0.0" y="44" width="768" height="911"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="22" width="768" height="911"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="center" id="Vw4-rc-IcY">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="911"/>
@@ -220,6 +215,11 @@
                                     <outlet property="delegate" destination="xbq-ar-EaV" id="s7n-GZ-Pmy"/>
                                 </connections>
                             </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="MvC-gf-ywi">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items/>
+                            </toolbar>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="hcw-Ut-nHk">
                                 <rect key="frame" x="365" y="459" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -327,12 +327,19 @@
         </class>
         <class className="PhotosTVC" superclassName="TopPlacesTVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosTVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
         <class className="RecentPhotosTVC" superclassName="PhotosTVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotosTVC.h"/>
         </class>
         <class className="TopPlacesTVC" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTVC.h"/>
+            <relationships>
+                <relationship kind="action" name="refresh:"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
