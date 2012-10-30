@@ -21,7 +21,7 @@
 
 -(void)setData{
     //show spinner while getting data
-    [self showSpinnerInToolBar];
+//    [self showSpinnerInToolBar];
     
     dispatch_queue_t fromDefaults = dispatch_queue_create("data from defaults", NULL);
     dispatch_async(fromDefaults, ^{

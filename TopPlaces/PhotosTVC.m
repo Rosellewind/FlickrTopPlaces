@@ -24,14 +24,13 @@
 
 -(void)setData{// called in viewDidLoad
     //show spinner while getting data
-    [self showSpinnerInToolBar];
+//    [self showSpinnerInToolBar];
     
     //get data
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr place data downloader", NULL);
     dispatch_async(downloadQueue, ^{
         NSArray *photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_RESULTS];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.navigationItem.rightBarButtonItem = self.refreshButton;
             if (![photos isEqualToArray:self.tableData]) {
                 self.tableData = photos;
                 [self.tableView reloadData];
@@ -41,9 +40,6 @@
 
 }
 
-- (IBAction)refresh:(id)sender {
-    [self setData];
-}
 
 #pragma mark - Table view data source
 
@@ -123,12 +119,12 @@
 -(void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
     dispatch_queue_t downloadQueue = dispatch_queue_create("annotation image downloader", NULL);
     dispatch_async(downloadQueue, ^{
-        UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
-        if ([mapView.selectedAnnotations containsObject:view]){
+/*        UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
+       if ([mapView.selectedAnnotations containsObject:view]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [(UIImageView*)view.leftCalloutAccessoryView setImage:image];
             });
-        }
+        }*/
     });
 }
 

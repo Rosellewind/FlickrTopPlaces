@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3D0EB816163B0C1100AFE7B5 /* white 30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0EB815163B0C1000AFE7B5 /* white 30x30.png */; };
+		3D3A86CE163F57A100BBBBFE /* TopPlacesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A86CD163F57A100BBBBFE /* TopPlacesVC.m */; };
+		3D3A86D2163F581500BBBBFE /* TopPlacesMVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A86D1163F581500BBBBFE /* TopPlacesMVC.m */; };
 		3D85F65B163E10C600D01980 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D85F659163E10C600D01980 /* CoreLocation.framework */; };
 		3D85F65C163E10C600D01980 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D85F65A163E10C600D01980 /* MapKit.framework */; };
 		3D923D7C163CBFF9003A2B2F /* Cacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D923D7B163CBFF9003A2B2F /* Cacher.m */; };
@@ -33,6 +35,10 @@
 /* Begin PBXFileReference section */
 		3D0EB815163B0C1000AFE7B5 /* white 30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white 30x30.png"; sourceTree = "<group>"; };
 		3D1E0F1816260E6E00CF135B /* ButtonDancer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonDancer.h; sourceTree = "<group>"; };
+		3D3A86CC163F57A100BBBBFE /* TopPlacesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlacesVC.h; sourceTree = "<group>"; };
+		3D3A86CD163F57A100BBBBFE /* TopPlacesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesVC.m; sourceTree = "<group>"; };
+		3D3A86D0163F581500BBBBFE /* TopPlacesMVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlacesMVC.h; sourceTree = "<group>"; };
+		3D3A86D1163F581500BBBBFE /* TopPlacesMVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesMVC.m; sourceTree = "<group>"; };
 		3D85F659163E10C600D01980 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3D85F65A163E10C600D01980 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3D923D7A163CBFF9003A2B2F /* Cacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
@@ -120,8 +126,12 @@
 				3DD423DE1624EC40005E91E7 /* TopPlacesAppDelegate.m */,
 				3DD423F61624ECAA005E91E7 /* iPhone.storyboard */,
 				3DD424061624FB3D005E91E7 /* iPad.storyboard */,
+				3D3A86CC163F57A100BBBBFE /* TopPlacesVC.h */,
+				3D3A86CD163F57A100BBBBFE /* TopPlacesVC.m */,
 				3DD423F41624EC6E005E91E7 /* TopPlacesTVC.h */,
 				3DD423F51624EC6E005E91E7 /* TopPlacesTVC.m */,
+				3D3A86D0163F581500BBBBFE /* TopPlacesMVC.h */,
+				3D3A86D1163F581500BBBBFE /* TopPlacesMVC.m */,
 				3DD423F81624EDAC005E91E7 /* PhotosTVC.h */,
 				3DD423F91624EDAD005E91E7 /* PhotosTVC.m */,
 				3DD424011624F19C005E91E7 /* RecentPhotosTVC.h */,
@@ -233,6 +243,8 @@
 				3DD423FE1624EF1E005E91E7 /* FlickrFetcher.m in Sources */,
 				3D923D7C163CBFF9003A2B2F /* Cacher.m in Sources */,
 				3DDEBB47163E387E00AEC1B6 /* FlickrPhotoAnnotation.m in Sources */,
+				3D3A86CE163F57A100BBBBFE /* TopPlacesVC.m in Sources */,
+				3D3A86D2163F581500BBBBFE /* TopPlacesMVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,5 +11,4 @@
 
 @interface PhotosTVC : TopPlacesTVC
 @property (nonatomic, strong) NSDictionary *place;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 @end

@@ -7,22 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-@class TopPlacesTVC;
-@protocol MapDelegate <NSObject>
--(UIImage*) viewController:(TopPlacesTVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation;
-@end
 
-
-@interface TopPlacesTVC : UIViewController<UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, MapDelegate>
+@interface TopPlacesTVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSArray *tableData;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) id <MapDelegate> mapDelegate;
-
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
--(void) showSpinnerInToolBar;
-- (IBAction)choseView:(UISegmentedControl *)sender;
-- (IBAction)refresh:(id)sender;
 
 @end
