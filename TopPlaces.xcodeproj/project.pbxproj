@@ -12,7 +12,11 @@
 		3D3A86D2163F581500BBBBFE /* TopPlacesMVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3A86D1163F581500BBBBFE /* TopPlacesMVC.m */; };
 		3D85F65B163E10C600D01980 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D85F659163E10C600D01980 /* CoreLocation.framework */; };
 		3D85F65C163E10C600D01980 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D85F65A163E10C600D01980 /* MapKit.framework */; };
+		3D89D54A1640428000FF3B70 /* RecentPhotosVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D89D5491640428000FF3B70 /* RecentPhotosVC.m */; };
+		3D89D54D164042AA00FF3B70 /* RecentPhotosMVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D89D54C164042AA00FF3B70 /* RecentPhotosMVC.m */; };
 		3D923D7C163CBFF9003A2B2F /* Cacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D923D7B163CBFF9003A2B2F /* Cacher.m */; };
+		3D9469D8163FBA6F000A34D0 /* PhotosVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9469D7163FBA6F000A34D0 /* PhotosVC.m */; };
+		3D9469DC163FBBDD000A34D0 /* PhotosMVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9469DB163FBBDD000A34D0 /* PhotosMVC.m */; };
 		3DD423CF1624EC3F005E91E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423CE1624EC3F005E91E7 /* UIKit.framework */; };
 		3DD423D11624EC3F005E91E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423D01624EC3F005E91E7 /* Foundation.framework */; };
 		3DD423D31624EC3F005E91E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423D21624EC3F005E91E7 /* CoreGraphics.framework */; };
@@ -41,8 +45,16 @@
 		3D3A86D1163F581500BBBBFE /* TopPlacesMVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesMVC.m; sourceTree = "<group>"; };
 		3D85F659163E10C600D01980 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3D85F65A163E10C600D01980 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3D89D5481640428000FF3B70 /* RecentPhotosVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotosVC.h; sourceTree = "<group>"; };
+		3D89D5491640428000FF3B70 /* RecentPhotosVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotosVC.m; sourceTree = "<group>"; };
+		3D89D54B164042AA00FF3B70 /* RecentPhotosMVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotosMVC.h; sourceTree = "<group>"; };
+		3D89D54C164042AA00FF3B70 /* RecentPhotosMVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotosMVC.m; sourceTree = "<group>"; };
 		3D923D7A163CBFF9003A2B2F /* Cacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
 		3D923D7B163CBFF9003A2B2F /* Cacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cacher.m; sourceTree = "<group>"; };
+		3D9469D6163FBA6F000A34D0 /* PhotosVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosVC.h; sourceTree = "<group>"; };
+		3D9469D7163FBA6F000A34D0 /* PhotosVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosVC.m; sourceTree = "<group>"; };
+		3D9469DA163FBBDD000A34D0 /* PhotosMVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosMVC.h; sourceTree = "<group>"; };
+		3D9469DB163FBBDD000A34D0 /* PhotosMVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosMVC.m; sourceTree = "<group>"; };
 		3DD423CA1624EC3F005E91E7 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD423CE1624EC3F005E91E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DD423D01624EC3F005E91E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,10 +144,18 @@
 				3DD423F51624EC6E005E91E7 /* TopPlacesTVC.m */,
 				3D3A86D0163F581500BBBBFE /* TopPlacesMVC.h */,
 				3D3A86D1163F581500BBBBFE /* TopPlacesMVC.m */,
+				3D9469D6163FBA6F000A34D0 /* PhotosVC.h */,
+				3D9469D7163FBA6F000A34D0 /* PhotosVC.m */,
 				3DD423F81624EDAC005E91E7 /* PhotosTVC.h */,
 				3DD423F91624EDAD005E91E7 /* PhotosTVC.m */,
+				3D9469DA163FBBDD000A34D0 /* PhotosMVC.h */,
+				3D9469DB163FBBDD000A34D0 /* PhotosMVC.m */,
+				3D89D5481640428000FF3B70 /* RecentPhotosVC.h */,
+				3D89D5491640428000FF3B70 /* RecentPhotosVC.m */,
 				3DD424011624F19C005E91E7 /* RecentPhotosTVC.h */,
 				3DD424021624F19C005E91E7 /* RecentPhotosTVC.m */,
+				3D89D54B164042AA00FF3B70 /* RecentPhotosMVC.h */,
+				3D89D54C164042AA00FF3B70 /* RecentPhotosMVC.m */,
 				3DD423FF1624F08A005E91E7 /* PhotoVC.h */,
 				3DD424001624F08A005E91E7 /* PhotoVC.m */,
 				3D1E0F1816260E6E00CF135B /* ButtonDancer.h */,
@@ -245,6 +265,10 @@
 				3DDEBB47163E387E00AEC1B6 /* FlickrPhotoAnnotation.m in Sources */,
 				3D3A86CE163F57A100BBBBFE /* TopPlacesVC.m in Sources */,
 				3D3A86D2163F581500BBBBFE /* TopPlacesMVC.m in Sources */,
+				3D9469D8163FBA6F000A34D0 /* PhotosVC.m in Sources */,
+				3D9469DC163FBBDD000A34D0 /* PhotosMVC.m in Sources */,
+				3D89D54A1640428000FF3B70 /* RecentPhotosVC.m in Sources */,
+				3D89D54D164042AA00FF3B70 /* RecentPhotosMVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

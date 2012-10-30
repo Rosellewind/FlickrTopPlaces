@@ -10,7 +10,7 @@
 #import "FlickrFetcher.h"
 #import "PhotosTVC.h"
 #import "RecentPhotosTVC.h"
-
+#import "PhotosVC.h"
 @interface TopPlacesTVC ()
 @end
 
@@ -47,14 +47,14 @@
     return cell;
 }
 
-
-
 #pragma mark - Transitions
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.destinationViewController isKindOfClass:[PhotosTVC class]]){
-        PhotosTVC *vc = segue.destinationViewController;
+    if ([segue.destinationViewController isMemberOfClass:[PhotosVC class]]){
+//    if (segue.identifier == @"photos container") {
+        PhotosVC *vc = segue.destinationViewController;
         vc.place = [self.tableData objectAtIndex:[self.tableView indexPathForCell:sender].row];
+        vc.isUsingMapOrTable = USING_TABLE;
     }
 }
 

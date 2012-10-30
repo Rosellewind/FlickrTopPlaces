@@ -8,6 +8,7 @@
 
 #import "TopPlacesMVC.h"
 #import "FlickrPhotoAnnotation.h"
+#import "PhotosVC.h"
 
 @interface TopPlacesMVC ()
 
@@ -20,6 +21,13 @@
 
 #pragma mark - Getters and Setters
 
+-(void) initialSetup{
+    self.mapView.delegate = self;
+    self.mapDelegate = self;
+    self.mapView.mapType = MKMapTypeHybrid;
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(15.623037,-38.320312), 10000000, 10000000) animated:YES];
+}
+
 -(void) setMapData:(NSArray *)mapData{
     if (![mapData isEqualToArray:self.mapData]){
         _mapData = mapData;
@@ -29,10 +37,7 @@
 
 -(void) setMapView:(MKMapView *)mapView{
     _mapView = mapView;
-    mapView.delegate = self;
-    self.mapDelegate = self;
-    self.mapView.mapType = MKMapTypeHybrid;
-    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(15.623037,-38.320312), 10000000, 10000000) animated:YES];
+    [self initialSetup];
     [self updateMapView];
 }
 
@@ -61,7 +66,23 @@
     }
     return annotations;
 }
--(UIImage*) viewController:(TopPlacesTVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{
-    //move to photo
+
+-(void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    [self performSegueWithIdentifier:@"map to photos" sender:self];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.destinationViewController isMemberOfClass:[PhotosVC class]]){
+        //    if (segue.identifier == @"map to photos") {
+        PhotosVC *vc = segue.destinationViewController;
+        vc.place = [[self.mapView.selectedAnnotations lastObject] place];
+        vc.isUsingMapOrTable = USING_MAP;
+        NSLog(@"vc isUsingMapOrTable:%i",vc.isUsingMapOrTable);
+
+    }
+}
+
+-(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{
+    return nil;
 }
 @end

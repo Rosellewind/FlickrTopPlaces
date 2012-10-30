@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#define USING_MAP 1
+#define USING_TABLE 0
+
 @class TopPlacesTVC;
 @class TopPlacesMVC;
 
@@ -16,7 +20,7 @@
 @property (nonatomic, strong) TopPlacesMVC *mvc;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton; //strong to reuse
-@property (nonatomic, assign) BOOL isMapCurrentOrTable;
+@property (nonatomic, assign) BOOL isUsingMapOrTable;
 
 -(void) showSpinnerInToolBar;
 - (IBAction)choseView:(UISegmentedControl *)sender;

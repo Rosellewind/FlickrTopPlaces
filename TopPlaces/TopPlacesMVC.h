@@ -9,14 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@class TopPlacesTVC;
+@class TopPlacesMVC;
 @protocol MapDelegate <NSObject>
--(UIImage*) viewController:(TopPlacesTVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation;
+-(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation;
 @end
 
 @interface TopPlacesMVC : UIViewController <MKMapViewDelegate, MapDelegate>
 @property (nonatomic, strong) NSArray *mapData;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) id <MapDelegate> mapDelegate;
+
+-(void) initialSetup;
 
 @end
