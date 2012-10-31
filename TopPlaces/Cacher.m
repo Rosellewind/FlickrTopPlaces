@@ -21,6 +21,7 @@
 }
 
 +(UIImage*) cachedImageForKey:(NSString*)key{
+    NSLog(@"fetching: cachedImageForKey");
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:[self urlForKey:key]]];
 }
 +(void) cacheImage:(UIImage*)image withKey:(NSString*)key{

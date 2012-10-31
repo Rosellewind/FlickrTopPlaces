@@ -14,14 +14,9 @@
 @end
 
 @implementation RecentPhotosMVC
--(void) initialSetup{//maybe?
-    NSLog(@"initialMapSetup");
-    [super initialSetup];
+-(void) setRegion{//delete*************
     NSDictionary *photo = [self.mapData objectAtIndex:0];
-    
-    //    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake([[photo valueForKey:FLICKR_LATITUDE]doubleValue],[[photo valueForKey:FLICKR_LONGITUDE] doubleValue]), MKCoordinateSpanMake(1, 1)) animated:YES];
-    
-    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake([[photo valueForKey:FLICKR_LATITUDE]doubleValue],[[photo valueForKey:FLICKR_LONGITUDE] doubleValue]), 1, 1) animated:YES];
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake([[photo valueForKey:FLICKR_LATITUDE]doubleValue],[[photo valueForKey:FLICKR_LONGITUDE] doubleValue]), 100000, 100000) animated:YES];
 }
 
 @end

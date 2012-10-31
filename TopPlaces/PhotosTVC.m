@@ -44,11 +44,12 @@
     cell.detailTextLabel.text = description;
     
 
-    cell.imageView.image = [UIImage imageNamed:@"white 30x30.png"];
+    cell.imageView.image = [UIImage imageNamed:@"white 75x75.png"];
 
     //get the image view
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
+        NSLog(@"fetching: cellForRowAtIndexPath");
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatSquare]]];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (indexPath.row == [tableView indexPathForCell:cell].row){

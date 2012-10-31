@@ -19,6 +19,5 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) id <MapDelegate> mapDelegate;
 
--(void) initialSetup;
 
 @end

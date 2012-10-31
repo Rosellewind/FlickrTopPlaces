@@ -19,19 +19,24 @@
 @synthesize mapView = _mapView;
 @synthesize mapDelegate = _mapDelegate;
 
-#pragma mark - Getters and Setters
 
 -(void) initialSetup{
     self.mapView.delegate = self;
     self.mapDelegate = self;
     self.mapView.mapType = MKMapTypeHybrid;
+}
+
+-(void) setRegion{
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(15.623037,-38.320312), 10000000, 10000000) animated:YES];
 }
+
+#pragma mark - Getters and Setters
 
 -(void) setMapData:(NSArray *)mapData{
     if (![mapData isEqualToArray:self.mapData]){
         _mapData = mapData;
         [self updateMapView];
+        [self setRegion];
     }
 }
 
@@ -39,6 +44,7 @@
     _mapView = mapView;
     [self initialSetup];
     [self updateMapView];
+    [self setRegion];
 }
 
 #pragma mark - Map View
@@ -77,8 +83,6 @@
         PhotosVC *vc = segue.destinationViewController;
         vc.place = [[self.mapView.selectedAnnotations lastObject] place];
         vc.isUsingMapOrTable = USING_MAP;
-        NSLog(@"vc isUsingMapOrTable:%i",vc.isUsingMapOrTable);
-
     }
 }
 

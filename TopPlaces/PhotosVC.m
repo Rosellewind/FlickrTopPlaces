@@ -26,8 +26,6 @@
     [self addChildViewController:self.tvc];
     [self addChildViewController:self.mvc];
     
-    NSLog(@"isUsingMapOrTable:%i",self.isUsingMapOrTable);
-    //self.isUsingMapOrTable = USING_TABLE;
     if (self.isUsingMapOrTable)
         [self.containerView addSubview:self.mvc.view];
     else [self.containerView addSubview:self.tvc.view];
@@ -42,7 +40,7 @@
     dispatch_async(downloadQueue, ^{
         NSArray *photos = [FlickrFetcher photosInPlace:self.place maxResults:MAX_RESULTS];
         dispatch_async(dispatch_get_main_queue(), ^{
-                self.dataArray = photos;
+            self.dataArray = photos;
             self.navigationItem.rightBarButtonItem = self.refreshButton;
         });
     });

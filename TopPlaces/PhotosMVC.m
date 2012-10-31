@@ -18,14 +18,11 @@
 
 @implementation PhotosMVC
 
--(void) initialSetup{
-    self.mapView.delegate = self;
-    self.mapDelegate = self;
-    self.mapView.mapType = MKMapTypeHybrid;
+
+-(void) setRegion{
     NSDictionary *photo = [self.mapData objectAtIndex:0];
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake([[photo valueForKey:FLICKR_LATITUDE]doubleValue],[[photo valueForKey:FLICKR_LONGITUDE] doubleValue]), 100000, 100000) animated:YES];
 }
-
 #pragma mark - Map
 
 -(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
@@ -36,6 +33,7 @@
         annView.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     }
     else annView.annotation = annotation;
+    
     [(UIImageView*)annView.leftCalloutAccessoryView setImage:nil];
     return annView;
 }
@@ -51,12 +49,13 @@
 -(void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
     dispatch_queue_t downloadQueue = dispatch_queue_create("annotation image downloader", NULL);
     dispatch_async(downloadQueue, ^{
-                UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
-         if ([mapView.selectedAnnotations containsObject:view]){
-         dispatch_async(dispatch_get_main_queue(), ^{
-         [(UIImageView*)view.leftCalloutAccessoryView setImage:image];
-         });
-         }
+        UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
+        if (
+            [mapView.selectedAnnotations containsObject:view.annotation]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [(UIImageView*)view.leftCalloutAccessoryView setImage:image];
+            });
+        }
     });
 }
 
@@ -76,6 +75,7 @@
 -(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{
     FlickrPhotoAnnotation *ann = (FlickrPhotoAnnotation*)annotation;
     NSURL *photoURL = [FlickrFetcher urlForPhoto:ann.photo format:FlickrPhotoFormatSquare];
+    NSLog(@"fetching: imageForAnnotation");
     NSData *data = [NSData dataWithContentsOfURL:photoURL];
     return data ? [UIImage imageWithData:data] : nil;
 }

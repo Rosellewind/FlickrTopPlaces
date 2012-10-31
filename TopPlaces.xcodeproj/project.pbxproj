@@ -17,6 +17,11 @@
 		3D923D7C163CBFF9003A2B2F /* Cacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D923D7B163CBFF9003A2B2F /* Cacher.m */; };
 		3D9469D8163FBA6F000A34D0 /* PhotosVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9469D7163FBA6F000A34D0 /* PhotosVC.m */; };
 		3D9469DC163FBBDD000A34D0 /* PhotosMVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9469DB163FBBDD000A34D0 /* PhotosMVC.m */; };
+		3DB3C98F16408514007CEF10 /* white 75x75.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB3C98E16408514007CEF10 /* white 75x75.png */; };
+		3DB3C993164086A3007CEF10 /* 150-sailboat.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB3C991164086A3007CEF10 /* 150-sailboat.png */; };
+		3DB3C994164086A3007CEF10 /* 150-sailboat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB3C992164086A3007CEF10 /* 150-sailboat@2x.png */; };
+		3DB3C997164086C5007CEF10 /* 103-map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB3C995164086C5007CEF10 /* 103-map.png */; };
+		3DB3C998164086C5007CEF10 /* 103-map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB3C996164086C5007CEF10 /* 103-map@2x.png */; };
 		3DD423CF1624EC3F005E91E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423CE1624EC3F005E91E7 /* UIKit.framework */; };
 		3DD423D11624EC3F005E91E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423D01624EC3F005E91E7 /* Foundation.framework */; };
 		3DD423D31624EC3F005E91E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD423D21624EC3F005E91E7 /* CoreGraphics.framework */; };
@@ -55,6 +60,11 @@
 		3D9469D7163FBA6F000A34D0 /* PhotosVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosVC.m; sourceTree = "<group>"; };
 		3D9469DA163FBBDD000A34D0 /* PhotosMVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosMVC.h; sourceTree = "<group>"; };
 		3D9469DB163FBBDD000A34D0 /* PhotosMVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosMVC.m; sourceTree = "<group>"; };
+		3DB3C98E16408514007CEF10 /* white 75x75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white 75x75.png"; sourceTree = "<group>"; };
+		3DB3C991164086A3007CEF10 /* 150-sailboat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "150-sailboat.png"; sourceTree = "<group>"; };
+		3DB3C992164086A3007CEF10 /* 150-sailboat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "150-sailboat@2x.png"; sourceTree = "<group>"; };
+		3DB3C995164086C5007CEF10 /* 103-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "103-map.png"; sourceTree = "<group>"; };
+		3DB3C996164086C5007CEF10 /* 103-map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "103-map@2x.png"; sourceTree = "<group>"; };
 		3DD423CA1624EC3F005E91E7 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD423CE1624EC3F005E91E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DD423D01624EC3F005E91E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -133,7 +143,12 @@
 		3DD423D41624EC3F005E91E7 /* TopPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				3DB3C995164086C5007CEF10 /* 103-map.png */,
+				3DB3C996164086C5007CEF10 /* 103-map@2x.png */,
+				3DB3C991164086A3007CEF10 /* 150-sailboat.png */,
+				3DB3C992164086A3007CEF10 /* 150-sailboat@2x.png */,
 				3D0EB815163B0C1000AFE7B5 /* white 30x30.png */,
+				3DB3C98E16408514007CEF10 /* white 75x75.png */,
 				3DD423DD1624EC40005E91E7 /* TopPlacesAppDelegate.h */,
 				3DD423DE1624EC40005E91E7 /* TopPlacesAppDelegate.m */,
 				3DD423F61624ECAA005E91E7 /* iPhone.storyboard */,
@@ -244,6 +259,11 @@
 				3DD423F71624ECAA005E91E7 /* iPhone.storyboard in Resources */,
 				3DD424071624FB3D005E91E7 /* iPad.storyboard in Resources */,
 				3D0EB816163B0C1100AFE7B5 /* white 30x30.png in Resources */,
+				3DB3C98F16408514007CEF10 /* white 75x75.png in Resources */,
+				3DB3C993164086A3007CEF10 /* 150-sailboat.png in Resources */,
+				3DB3C994164086A3007CEF10 /* 150-sailboat@2x.png in Resources */,
+				3DB3C997164086C5007CEF10 /* 103-map.png in Resources */,
+				3DB3C998164086C5007CEF10 /* 103-map@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +363,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
 				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -355,7 +375,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TopPlaces/TopPlaces-Prefix.pch";
 				INFOPLIST_FILE = "TopPlaces/TopPlaces-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

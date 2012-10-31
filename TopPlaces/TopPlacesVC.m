@@ -45,9 +45,8 @@
 -(void) setDataArray:(NSArray *)dataArray{
     if (![self.dataArray isEqualToArray:dataArray]){
         _dataArray = dataArray;
-        if (self.isUsingMapOrTable) {
+        if (self.isUsingMapOrTable == USING_MAP) {
             self.mvc.mapData = self.dataArray;
-
         }
         else{
             self.tvc.tableData = self.dataArray;

@@ -51,6 +51,7 @@
         //get photo
         dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image downloader", NULL);
         dispatch_async(downloadQueue, ^{
+            NSLog(@"fetching: loadImage");
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.spinner stopAnimating];
