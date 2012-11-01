@@ -74,14 +74,13 @@
 }
 
 -(void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-    [self performSegueWithIdentifier:@"map to photos" sender:self];
+    [self performSegueWithIdentifier:@"map to photos" sender:view];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isMemberOfClass:[PhotosVC class]]){
-        //    if (segue.identifier == @"map to photos") {
         PhotosVC *vc = segue.destinationViewController;
-        vc.place = [[self.mapView.selectedAnnotations lastObject] place];
+        vc.place = [(FlickrPhotoAnnotation*)[(MKAnnotationView*)sender annotation] place];
         vc.isUsingMapOrTable = USING_MAP;
     }
 }

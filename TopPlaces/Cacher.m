@@ -13,37 +13,37 @@
 @implementation Cacher
 
 
-+(NSURL*) urlForKey:(NSString*)key{
++(NSURL*) photoUrlForKey:(NSString*)key isThumb:(BOOL)isThumb{
     NSFileManager *manager = [[NSFileManager alloc]init];
     NSURL *cacheURL = [[manager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *url = [[cacheURL URLByAppendingPathComponent:@"photos"] URLByAppendingPathComponent:key];
     return url;
 }
 
-+(UIImage*) cachedImageForKey:(NSString*)key{
-    NSLog(@"fetching: cachedImageForKey");
-    return [UIImage imageWithData:[NSData dataWithContentsOfURL:[self urlForKey:key]]];
++(UIImage*) cachedImageForKey:(NSString*)key isThumb:(BOOL)isThumb{
+//    NSLog(@"fetching: cachedImageForKey");
+    return [UIImage imageWithData:[NSData dataWithContentsOfURL:[self photoUrlForKey:key]]];
 }
-+(void) cacheImage:(UIImage*)image withKey:(NSString*)key{
++(void) cacheImage:(UIImage*)image withKey:(NSString*)key isThumb:(BOOL)isThumb{
     NSFileManager *manager = [[NSFileManager alloc]init];
     NSData *data = UIImagePNGRepresentation(image);
     
-    if (![manager fileExistsAtPath:[[self urlForKey:@""] path]]) {
-        [manager createDirectoryAtURL:[self urlForKey:@""] withIntermediateDirectories:NO attributes:nil error:nil];
+    if (![manager fileExistsAtPath:[[self photoUrlForKey:@""] path]]) {
+        [manager createDirectoryAtURL:[self photoUrlForKey:@""] withIntermediateDirectories:NO attributes:nil error:nil];
     }
-    [data writeToURL:[self urlForKey:key] atomically:YES];
+    [data writeToURL:[self photoUrlForKey:key] atomically:YES];
 }
 
-+(BOOL)isOverLimit{
++(BOOL)isOverLimit isThumb:(BOOL)isThumb{
     NSFileManager *manager = [[NSFileManager alloc]init];
-    if ([[manager attributesOfItemAtPath:[self urlForKey:@""].path error:nil]fileSize] > MB_TO_BYTE(10))
+    if ([[manager attributesOfItemAtPath:[self photoUrlForKey:@""].path error:nil]fileSize] > MB_TO_BYTE(10))
         return YES;
     else return NO;
 }
 
-+(void)removeCacheForKey:(NSString*)key{
++(void)removeCacheForKey:(NSString*)key isThumb:(BOOL)isThumb{
     NSFileManager *manager = [[NSFileManager alloc]init];
-    [manager removeItemAtURL:[self urlForKey:key] error:nil];
+    [manager removeItemAtURL:[self photoUrlForKey:key] error:nil];
 }
 
 @end

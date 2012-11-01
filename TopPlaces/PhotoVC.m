@@ -43,15 +43,17 @@
     //check to see if photo is cached
     UIImage *cachedImage = [Cacher cachedImageForKey:key];
     if (cachedImage){
-        [self.spinner stopAnimating];
-        self.imageView.image = cachedImage;
-        [self prepareImage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.spinner stopAnimating];
+            self.imageView.image = cachedImage;
+            [self prepareImage];
+            });
     }
     else {
         //get photo
         dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image downloader", NULL);
         dispatch_async(downloadQueue, ^{
-            NSLog(@"fetching: loadImage");
+//            NSLog(@"fetching: loadImage");
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.spinner stopAnimating];
@@ -91,12 +93,13 @@
 #pragma mark - Life Cycle
 - (void)viewDidLoad
 {
-    if (!self.splitViewController)[self loadImage];
     [super viewDidLoad];
-    self.navigationItem.title = self.description;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.cachedPhotos = [[defaults arrayForKey:@"cachedPhotos"]mutableCopy];
     if (!self.cachedPhotos) self.cachedPhotos = [[NSMutableArray alloc]init];
+    
+    if (!self.splitViewController)[self loadImage];
+    self.navigationItem.title = self.description;
 }
 
 -(void)viewWillAppear:(BOOL)animated{

@@ -11,7 +11,7 @@
 #import "PhotosTVC.h"
 #import "PhotosMVC.h"
 
-#define MAX_RESULTS 5
+#define MAX_RESULTS 50
 
 @interface PhotosVC ()
 

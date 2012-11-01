@@ -49,7 +49,7 @@
     //get the image view
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
-        NSLog(@"fetching: cellForRowAtIndexPath");
+//        NSLog(@"fetching: cellForRowAtIndexPath");
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatSquare]]];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (indexPath.row == [tableView indexPathForCell:cell].row){
