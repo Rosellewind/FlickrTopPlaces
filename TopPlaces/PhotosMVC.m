@@ -11,6 +11,7 @@
 #import "FlickrFetcher.h"
 #import "PhotoVC.h"
 #import "Cacher.h"
+#import "PhotosVC.h"
 
 
 @interface PhotosMVC ()
@@ -121,12 +122,29 @@
 }
 
 -(void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-    [self performSegueWithIdentifier:@"map to photo" sender:view];
+    if (self.splitViewController){
+        id vc = [self.splitViewController.viewControllers lastObject];
+        if ([vc isKindOfClass:[PhotoVC class]]){
+            [self prepareVC:vc withView:view];
+            [vc loadImage];
+        }
+    }
+    else [self performSegueWithIdentifier:@"map to photo" sender:view];
+}
+
+-(void)prepareVC:(PhotoVC*)vc withView:(MKAnnotationView*)view{
+    NSDictionary *photo = [(FlickrPhotoAnnotation*)[(MKAnnotationView*)view annotation] photo];
+
+
+    [PhotosVC savePicToRecentlyViewed:photo];
+    vc.photo = photo;
+    vc.description =[(FlickrPhotoAnnotation*)view.annotation title];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isMemberOfClass:[PhotoVC class]]){
         PhotoVC *vc = (PhotoVC*)segue.destinationViewController;
+        [self prepareVC:vc withView:(MKAnnotationView*)sender];
         vc.photo = [(FlickrPhotoAnnotation*)[(MKAnnotationView*)sender annotation] photo];
     }
 }

@@ -38,7 +38,8 @@
 
 +(BOOL)isOverLimitIsThumb:(BOOL)isThumb{
     NSFileManager *manager = [[NSFileManager alloc]init];
-    if ([[manager attributesOfItemAtPath:[self photoUrlForKey:@"" isThumb:isThumb].path error:nil]fileSize] > MB_TO_BYTE(10))
+    int maxMB = isThumb ? 2 : 10;
+    if ([[manager attributesOfItemAtPath:[self photoUrlForKey:@"" isThumb:isThumb].path error:nil]fileSize] > MB_TO_BYTE(maxMB))
         return YES;
     else return NO;
 }

@@ -7,13 +7,13 @@
         <!--Top PlacesVC - Top Places-->
         <scene sceneID="wBi-Ae-C4l">
             <objects>
-                <viewController id="23W-P7-EMs" customClass="TopPlacesVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Top Places" id="23W-P7-EMs" customClass="TopPlacesVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h3A-Gi-gbu">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView autoresizesSubviews="NO" contentMode="scaleToFill" id="D6h-mw-LFI">
-                                <rect key="frame" x="0.0" y="30" width="320" height="424"/>
+                                <rect key="frame" x="0.0" y="31" width="320" height="424"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </containerView>
@@ -182,15 +182,15 @@
             <objects>
                 <viewController id="43W-FF-3Ir" customClass="PhotoVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kpq-2e-FgO">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" minimumZoomScale="0.20000000000000001" maximumZoomScale="2.5" id="DLO-Ml-V2k">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="center" id="A2u-ON-feh">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -307,7 +307,7 @@
         <!--PhotosVC - Photos-->
         <scene sceneID="cQc-mc-tec">
             <objects>
-                <viewController id="j9W-h2-6cM" customClass="PhotosVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Photos" id="j9W-h2-6cM" customClass="PhotosVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h8z-Nw-Tz2">
                         <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -507,6 +507,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="3fI-R6-MML" id="yVC-Aq-NBA"/>
+                        <outlet property="mapOrTableControl" destination="w8m-K5-WAM" id="XFh-Am-ehy"/>
                         <outlet property="refreshButton" destination="dQp-Vu-eIb" id="zpR-cg-3PF"/>
                     </connections>
                 </viewController>
@@ -524,6 +525,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoVC.h"/>
             <relationships>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="ipadTitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
@@ -562,6 +564,7 @@
                 <relationship kind="action" name="choseView:" candidateClass="UISegmentedControl"/>
                 <relationship kind="action" name="refresh:"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mapOrTableControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
@@ -572,8 +575,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0Fx-Rw-AID"/>
         <segue reference="R8x-87-Jdl"/>
-        <segue reference="pMv-bL-15i"/>
+        <segue reference="7Ig-4x-Kbb"/>
+        <segue reference="0Fx-Rw-AID"/>
     </inferredMetricsTieBreakers>
 </document>

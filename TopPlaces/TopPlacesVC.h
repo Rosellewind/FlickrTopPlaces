@@ -20,6 +20,7 @@
 @property (nonatomic, strong) TopPlacesMVC *mvc;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton; //strong to reuse
+@property (weak, nonatomic) IBOutlet UISegmentedControl *mapOrTableControl;
 @property (nonatomic, assign) BOOL isUsingMapOrTable;
 
 -(void) showSpinnerInToolBar;

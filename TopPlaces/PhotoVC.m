@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UILabel *ipadTitle;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (strong, nonatomic) NSMutableArray *cachedPhotos;
 
@@ -81,6 +82,7 @@
     double adjHeight = image.size.height * self.scrollView.zoomScale;
     self.imageView.frame = CGRectMake(0, 0, adjWidth, adjHeight);
     self.scrollView.contentSize = CGSizeMake(adjWidth, adjHeight);
+    if (self.ipadTitle) self.ipadTitle.text = self.description;
 }
 
 -(float) initialZoomScaleForImage:(UIImage*) image inBounds:(CGRect) bounds{
@@ -88,6 +90,10 @@
     float widthZoom = bounds.size.width/image.size.width;
     float max = MAX(heightZoom, widthZoom);
     return max;
+}
+
+-(void)initialSetup{
+    
 }
 
 #pragma mark - Life Cycle
@@ -115,6 +121,7 @@
     [self setImageView:nil];
     [self setTitle:nil];
     [self setScrollView:nil];
+    [self setIpadTitle:nil];
     [super viewDidUnload];
 }
 

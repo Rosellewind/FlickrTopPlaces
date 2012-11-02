@@ -11,5 +11,4 @@
 @interface RecentPhotosMVC : PhotosMVC
 
 
-
 @end

@@ -12,4 +12,5 @@
 @interface PhotosVC : TopPlacesVC
 @property (nonatomic, strong) NSDictionary *place;
 
++(void)savePicToRecentlyViewed:(NSDictionary*)photo;
 @end

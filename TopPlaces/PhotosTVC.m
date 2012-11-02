@@ -114,30 +114,10 @@
 -(void)prepareVC:(PhotoVC*)vc{
     NSIndexPath *index= [self.tableView indexPathForSelectedRow];
     NSDictionary *photo = [self.tableData objectAtIndex:index.row];
-    [self savePicToRecentlyViewed:photo];
+    [PhotosVC savePicToRecentlyViewed:photo];
+//    [self savePicToRecentlyViewed:photo];
     vc.photo = photo;
     vc.description = [[[self.tableView cellForRowAtIndexPath:index]textLabel]text];
-}
-
-
--(void)savePicToRecentlyViewed:(NSDictionary*)photo{
-    dispatch_queue_t defaultsQueue = dispatch_queue_create("save to defaults", NULL);
-    dispatch_async(defaultsQueue, ^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSMutableArray *recentlyViewed = [[defaults objectForKey:@"recentlyViewed"] mutableCopy];
-        if(!recentlyViewed) recentlyViewed = [[NSMutableArray alloc]init];
-        NSUInteger index = [recentlyViewed indexOfObject:photo];
-        if (index != NSNotFound)//swap places............
-            [recentlyViewed exchangeObjectAtIndex:0 withObjectAtIndex:[recentlyViewed indexOfObject:photo]];
-        else{
-            [recentlyViewed insertObject:photo atIndex:0];
-            if (recentlyViewed.count > 20) {
-                recentlyViewed = [[recentlyViewed subarrayWithRange:NSMakeRange(0, 19)]mutableCopy];
-            }
-        }
-        [defaults setObject:recentlyViewed forKey:@"recentlyViewed"];
-        [defaults synchronize];
-    });
 }
     
 -(void)viewDidLoad{

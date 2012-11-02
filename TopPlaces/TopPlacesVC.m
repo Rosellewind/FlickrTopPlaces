@@ -100,4 +100,9 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self setMapOrTableControl:nil];
+    [super viewDidUnload];
+}
+
 @end
