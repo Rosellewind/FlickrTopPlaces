@@ -16,7 +16,6 @@
 
 @interface PhotosMVC ()
 @property (strong, nonatomic) NSMutableArray *cachedThumbs;
-
 @end
 
 @implementation PhotosMVC

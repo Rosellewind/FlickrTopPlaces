@@ -18,9 +18,12 @@
 @end
 
 @implementation TopPlacesVC
+@synthesize containerView = _containerView;
 @synthesize tvc = _tvc;
 @synthesize mvc = _mvc;
 @synthesize dataArray = _dataArray;
+@synthesize refreshButton = _refreshButton;
+@synthesize mapOrTableControl = _mapOrTableControl;
 @synthesize isUsingMapOrTable = _isUsingMapOrTable;
 
 #pragma mark - Setup

@@ -21,6 +21,7 @@
 
 @implementation PhotosTVC
 @synthesize place = _place;
+@synthesize cachedThumbs = _cachedThumbs;
 
 #pragma mark - Table view data source
 

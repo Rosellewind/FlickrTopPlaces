@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 class. All rights reserved.
 //
 
+
 #import "PhotoVC.h"
 #import "FlickrFetcher.h"
 #import "ButtonDancer.h"
@@ -28,6 +29,7 @@
 @synthesize imageView = _imageView;
 @synthesize scrollView = _scrollView;
 @synthesize toolbar = _toolbar;
+@synthesize ipadTitle = _ipadTitle;
 @synthesize spinner = _spinner;
 @synthesize cachedPhotos = _cachedPhotos;
 
