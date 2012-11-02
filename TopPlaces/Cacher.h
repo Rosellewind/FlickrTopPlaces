@@ -10,9 +10,9 @@
 
 @interface Cacher : NSObject
 +(NSURL*) photoUrlForKey:(NSString*)key isThumb:(BOOL)isThumb;
-+(void) cacheImage:(UIImage*)image withKey:(NSString*)key;
-+(UIImage*) cachedImageForKey:(NSString*)key;
-+(BOOL)isOverLimit;
-+(void)removeCacheForKey:(NSString*)key;
++(UIImage*) cachedImageForKey:(NSString*)key isThumb:(BOOL)isThumb;
++(void) cacheImage:(UIImage*)image withKey:(NSString*)key isThumb:(BOOL)isThumb;
++(BOOL)isOverLimitIsThumb:(BOOL)isThumb;
++(void)removeCacheForKey:(NSString*)key isThumb:(BOOL)isThumb;
 
 @end

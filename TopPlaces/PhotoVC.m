@@ -41,13 +41,11 @@
     [self.spinner startAnimating];
     
     //check to see if photo is cached
-    UIImage *cachedImage = [Cacher cachedImageForKey:key];
+    UIImage *cachedImage = [Cacher cachedImageForKey:key isThumb:NO];
     if (cachedImage){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.spinner stopAnimating];
-            self.imageView.image = cachedImage;
-            [self prepareImage];
-            });
+        [self.spinner stopAnimating];
+        self.imageView.image = cachedImage;
+        [self prepareImage];
     }
     else {
         //get photo
@@ -60,15 +58,17 @@
                 self.imageView.image = image;
                 [self prepareImage];
             });
+            
+            //manage cache
             [self.cachedPhotos insertObject:key atIndex:0];
-            if ([Cacher isOverLimit]){
-                [Cacher removeCacheForKey:[self.cachedPhotos lastObject]];
+            if ([Cacher isOverLimitIsThumb:NO]){
+                [Cacher removeCacheForKey:[self.cachedPhotos lastObject] isThumb:NO];
                 [self.cachedPhotos removeLastObject];
             }
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:self.cachedPhotos forKey:@"cachedPhotos"];
             [defaults synchronize];
-            [Cacher cacheImage:image withKey:key];
+            [Cacher cacheImage:image withKey:key isThumb:NO];
         });
     }
 }

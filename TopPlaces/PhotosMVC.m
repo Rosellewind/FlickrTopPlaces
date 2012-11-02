@@ -10,14 +10,16 @@
 #import "FlickrPhotoAnnotation.h"
 #import "FlickrFetcher.h"
 #import "PhotoVC.h"
+#import "Cacher.h"
 
 
 @interface PhotosMVC ()
+@property (strong, nonatomic) NSMutableArray *cachedThumbs;
 
 @end
 
 @implementation PhotosMVC
-
+@synthesize cachedThumbs = _cachedThumbs;
 
 -(void) setRegion{
     CLLocationDegrees minLat, maxLat, minLon, maxLon;
@@ -86,16 +88,36 @@
 }
 
 -(void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
-    dispatch_queue_t downloadQueue = dispatch_queue_create("annotation image downloader", NULL);
-    dispatch_async(downloadQueue, ^{
-        UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
-        if (
-            [mapView.selectedAnnotations containsObject:view.annotation]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [(UIImageView*)view.leftCalloutAccessoryView setImage:image];
-            });
-        }
-    });
+    NSString *key = [[(FlickrPhotoAnnotation*)view.annotation photo] objectForKey:@"id"];
+    
+    //check to see if photo is cached
+    UIImage *cachedImage = [Cacher cachedImageForKey:key isThumb:YES];
+    if (cachedImage){
+        [(UIImageView*)view.leftCalloutAccessoryView setImage:cachedImage];
+    }
+    else{
+        //get photo
+        dispatch_queue_t downloadQueue = dispatch_queue_create("annotation image downloader", NULL);
+        dispatch_async(downloadQueue, ^{
+            UIImage *image = [self.mapDelegate viewController:self imageForAnnotation:view.annotation];
+            if (
+                [mapView.selectedAnnotations containsObject:view.annotation]){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [(UIImageView*)view.leftCalloutAccessoryView setImage:image];
+                });
+            }
+            //manage cache
+            [self.cachedThumbs insertObject:key atIndex:0];
+            if ([Cacher isOverLimitIsThumb:YES]){
+                [Cacher removeCacheForKey:[self.cachedThumbs lastObject] isThumb:YES];// take ooff isthumb
+                [self.cachedThumbs removeLastObject];
+            }
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:self.cachedThumbs forKey:@"cachedThumbs"];
+            [defaults synchronize];
+            [Cacher cacheImage:image withKey:key isThumb:YES];
+        });
+    }
 }
 
 -(void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
@@ -113,9 +135,17 @@
 -(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{//in thread
     FlickrPhotoAnnotation *ann = (FlickrPhotoAnnotation*)annotation;
     NSURL *photoURL = [FlickrFetcher urlForPhoto:ann.photo format:FlickrPhotoFormatSquare];
+    
 //    NSLog(@"fetching: imageForAnnotation");
     NSData *data = [NSData dataWithContentsOfURL:photoURL];
     return data ? [UIImage imageWithData:data] : nil;
+}
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.cachedThumbs = [[defaults arrayForKey:@"cachedThumbs"]mutableCopy];
+    if (!self.cachedThumbs) self.cachedThumbs = [[NSMutableArray alloc]init];
 }
 
 
