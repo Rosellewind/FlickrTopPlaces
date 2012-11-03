@@ -11,10 +11,11 @@
 #import "PhotoVC.h"
 
 @interface RecentPhotosMVC ()
-
 @end
 
 @implementation RecentPhotosMVC
+
+#pragma mark - Map View Delegate
 
 -(void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
     if (self.splitViewController){

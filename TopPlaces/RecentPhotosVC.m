@@ -15,6 +15,9 @@
 @end
 
 @implementation RecentPhotosVC
+
+#pragma mark - Setup
+
 -(void) initialSetup{
     self.tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Recent Table"];
     self.mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Recent Map"];
@@ -26,15 +29,6 @@
 }
 
 -(void)setData{
-    //show spinner to user to show that it went through
-    //maybe take this out or put it in TopPlacesVC with variable isLoading if still loading
-    [self showSpinnerInToolBar];
-    int64_t delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.navigationItem.rightBarButtonItem = self.refreshButton;
-    });
-    
     dispatch_queue_t fromDefaults = dispatch_queue_create("data from defaults", NULL);
     dispatch_async(fromDefaults, ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

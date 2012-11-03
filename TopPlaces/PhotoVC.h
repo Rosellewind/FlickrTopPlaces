@@ -10,6 +10,7 @@
 #import "ButtonDancer.h"
 
 @interface PhotoVC : UIViewController <ButtonDancer>
+
 @property (nonatomic, strong) NSDictionary *photo;
 @property (nonatomic, strong) NSString *description;
 

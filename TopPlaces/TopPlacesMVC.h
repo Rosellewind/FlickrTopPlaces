@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 
 @class TopPlacesMVC;
+
 @protocol MapDelegate <NSObject>
 -(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation;
 @end

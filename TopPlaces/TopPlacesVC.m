@@ -12,7 +12,6 @@
 #import "TopPlacesMVC.h"
 
 @interface TopPlacesVC ()
-
 @end
 
 @implementation TopPlacesVC
@@ -26,13 +25,13 @@
 
 #pragma mark - Setup
 
--(void) viewDidLoad{
+- (void) viewDidLoad{
     [super viewDidLoad];
     [self setData];
     [self initialSetup];
 }
 
--(void) initialSetup{
+- (void) initialSetup{
     self.tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Places Table"];
     self.mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Places Map"];
     [self addChildViewController:self.tvc];
@@ -43,7 +42,7 @@
 }
 
 #pragma mark - Getters and Setters
--(void) setDataArray:(NSArray *)dataArray{
+- (void) setDataArray:(NSArray *)dataArray{
     if (![self.dataArray isEqualToArray:dataArray]){
         _dataArray = dataArray;
         if (self.isUsingMapOrTable == USING_MAP) {
@@ -100,6 +99,7 @@
         }];
     }
 }
+#pragma mark - Life Cycle
 
 - (void)viewDidUnload {
     [self setMapOrTableControl:nil];

@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapOrTableControl;
 @property (nonatomic, assign) BOOL isUsingMapOrTable;
 
--(void) showSpinnerInToolBar;
+- (void) showSpinnerInToolBar;
 - (IBAction)choseView:(UISegmentedControl *)sender;
 - (IBAction)refresh:(id)sender;
 

@@ -11,7 +11,6 @@
 #import "PhotosVC.h"
 
 @interface TopPlacesMVC ()
-
 @end
 
 @implementation TopPlacesMVC
@@ -19,15 +18,12 @@
 @synthesize mapView = _mapView;
 @synthesize mapDelegate = _mapDelegate;
 
+#pragma mark - Setup
 
 -(void) initialSetup{
     self.mapView.delegate = self;
     self.mapDelegate = self;
     self.mapView.mapType = MKMapTypeHybrid;
-}
-
--(void) setRegion{
-    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(15.623037,-38.320312), 10000000, 10000000) animated:YES];
 }
 
 #pragma mark - Getters and Setters
@@ -47,12 +43,26 @@
     [self setRegion];
 }
 
-#pragma mark - Map View
+#pragma mark - Map
 
 -(void) updateMapView{
     if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
     if (self.mapData) [self.mapView addAnnotations:[self mapAnnotations]];
 }
+
+-(NSArray*) mapAnnotations{
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:self.mapData.count];
+    for (NSDictionary *place in self.mapData){
+        [annotations addObject:[FlickrPhotoAnnotation annotationForPlace:place]];
+    }
+    return annotations;
+}
+
+-(void) setRegion{
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(15.623037,-38.320312), 10000000, 10000000) animated:YES];
+}
+
+#pragma mark - Map View Delegate
 
 -(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     MKAnnotationView *annView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"annView"];
@@ -65,17 +75,11 @@
     return annView;
 }
 
--(NSArray*) mapAnnotations{
-    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:self.mapData.count];
-    for (NSDictionary *place in self.mapData){
-        [annotations addObject:[FlickrPhotoAnnotation annotationForPlace:place]];
-    }
-    return annotations;
-}
-
 -(void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
     [self performSegueWithIdentifier:@"map to photos" sender:view];
 }
+
+#pragma mark - Transitions
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.destinationViewController isMemberOfClass:[PhotosVC class]]){
@@ -85,7 +89,4 @@
     }
 }
 
--(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{
-    return nil;
-}
 @end

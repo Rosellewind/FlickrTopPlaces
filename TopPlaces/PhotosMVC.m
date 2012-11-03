@@ -21,6 +21,31 @@
 @implementation PhotosMVC
 @synthesize cachedThumbs = _cachedThumbs;
 
+#pragma mark - Map
+
+-(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    MKAnnotationView *annView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"annView"];
+    if (!annView){
+        annView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"annView"];
+        annView.canShowCallout = YES;
+        annView.rightCalloutAccessoryView = [UIButton buttonWithType: UIButtonTypeDetailDisclosure];
+
+        annView.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    }
+    else annView.annotation = annotation;
+    
+    [(UIImageView*)annView.leftCalloutAccessoryView setImage:nil];
+    return annView;
+}
+
+-(NSArray*) mapAnnotations{
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:self.mapData.count];
+    for (NSDictionary *photo in self.mapData){
+        [annotations addObject:[FlickrPhotoAnnotation annotationForPhoto:photo]];
+    }
+    return annotations;
+}
+
 -(void) setRegion{
     CLLocationDegrees minLat, maxLat, minLon, maxLon;
     double pad = 0;//changes at .1, too far zoomed out
@@ -60,31 +85,17 @@
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(midLat, midLon);
     
     [self.mapView setRegion:MKCoordinateRegionMake(center, span)];
-//    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake([[photo valueForKey:FLICKR_LATITUDE]doubleValue],[[photo valueForKey:FLICKR_LONGITUDE] doubleValue]), 100000, 100000) animated:YES];
 }
-#pragma mark - Map
 
--(MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    MKAnnotationView *annView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"annView"];
-    if (!annView){
-        annView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"annView"];
-        annView.canShowCallout = YES;
-        annView.rightCalloutAccessoryView = [UIButton buttonWithType: UIButtonTypeDetailDisclosure];
+#pragma mark - Map View Delegate
 
-        annView.leftCalloutAccessoryView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    }
-    else annView.annotation = annotation;
+-(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{//in thread
+    FlickrPhotoAnnotation *ann = (FlickrPhotoAnnotation*)annotation;
+    NSURL *photoURL = [FlickrFetcher urlForPhoto:ann.photo format:FlickrPhotoFormatSquare];
     
-    [(UIImageView*)annView.leftCalloutAccessoryView setImage:nil];
-    return annView;
-}
-
--(NSArray*) mapAnnotations{
-    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:self.mapData.count];
-    for (NSDictionary *photo in self.mapData){
-        [annotations addObject:[FlickrPhotoAnnotation annotationForPhoto:photo]];
-    }
-    return annotations;
+    //    NSLog(@"fetching: imageForAnnotation");
+    NSData *data = [NSData dataWithContentsOfURL:photoURL];
+    return data ? [UIImage imageWithData:data] : nil;
 }
 
 -(void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
@@ -131,10 +142,10 @@
     else [self performSegueWithIdentifier:@"map to photo" sender:view];
 }
 
+#pragma mark - Transitions
+
 -(void)prepareVC:(PhotoVC*)vc withView:(MKAnnotationView*)view{
     NSDictionary *photo = [(FlickrPhotoAnnotation*)[(MKAnnotationView*)view annotation] photo];
-
-
     [Cacher savePicToRecentlyViewed:photo];
     vc.photo = photo;
     vc.description =[(FlickrPhotoAnnotation*)view.annotation title];
@@ -148,15 +159,7 @@
     }
 }
 
-#pragma mark - MapDelegate
--(UIImage*) viewController:(TopPlacesMVC*) vc imageForAnnotation:(id <MKAnnotation>) annotation{//in thread
-    FlickrPhotoAnnotation *ann = (FlickrPhotoAnnotation*)annotation;
-    NSURL *photoURL = [FlickrFetcher urlForPhoto:ann.photo format:FlickrPhotoFormatSquare];
-    
-//    NSLog(@"fetching: imageForAnnotation");
-    NSData *data = [NSData dataWithContentsOfURL:photoURL];
-    return data ? [UIImage imageWithData:data] : nil;
-}
+#pragma mark - Life Cycle
 
 -(void)viewDidLoad{
     [super viewDidLoad];

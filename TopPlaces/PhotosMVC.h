@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "TopPlacesMVC.h"
+
 @class PhotoVC;
 
 @interface PhotosMVC : TopPlacesMVC
+
 -(void)prepareVC:(PhotoVC*)vc withView:(MKAnnotationView*)view;
 
 @end

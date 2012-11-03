@@ -96,10 +96,6 @@
     return max;
 }
 
--(void)initialSetup{
-    
-}
-
 #pragma mark - Life Cycle
 - (void)viewDidLoad
 {

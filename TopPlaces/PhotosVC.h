@@ -10,6 +10,7 @@
 #import "TopPlacesVC.h"
 
 @interface PhotosVC : TopPlacesVC
+
 @property (nonatomic, strong) NSDictionary *place;
 
 @end

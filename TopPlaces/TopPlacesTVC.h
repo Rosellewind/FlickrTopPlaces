@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TopPlacesTVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+
 @property (nonatomic, strong) NSArray *tableData;
 
 @end

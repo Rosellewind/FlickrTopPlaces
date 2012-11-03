@@ -10,5 +10,4 @@
 
 @interface RecentPhotosMVC : PhotosMVC<MKMapViewDelegate>
 
-
 @end

@@ -10,7 +10,6 @@
 #import "FlickrFetcher.h"
 #import "PhotoVC.h"
 #import "FlickrPhotoAnnotation.h"
-//#import "PhotosVC.h"
 #import "Cacher.h"
 
 #define MAX_RESULTS 50
@@ -124,7 +123,9 @@
     vc.photo = photo;
     vc.description = [[[self.tableView cellForRowAtIndexPath:index]textLabel]text];
 }
-    
+
+#pragma mark - Life Cycle
+
 -(void)viewDidLoad{
     [super viewDidLoad];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

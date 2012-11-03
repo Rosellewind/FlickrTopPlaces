@@ -14,10 +14,7 @@
 
 @implementation RecentPhotosTVC
 
-
--(void)savePicToRecentlyViewed:(NSDictionary*)photo{
-//empty to override
-}
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -11,6 +11,7 @@
 #import "PhotosTVC.h"
 #import "RecentPhotosTVC.h"
 #import "PhotosVC.h"
+
 @interface TopPlacesTVC ()
 @end
 
@@ -54,7 +55,6 @@
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     NSLog(@"prepareForSegue");
     if ([segue.destinationViewController isMemberOfClass:[PhotosVC class]]){
-//    if (segue.identifier == @"photos container") {
         PhotosVC *vc = segue.destinationViewController;
         vc.place = [self.tableData objectAtIndex:[self.tableView indexPathForCell:sender].row];
         vc.isUsingMapOrTable = USING_TABLE;

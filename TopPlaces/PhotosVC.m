@@ -20,6 +20,8 @@
 @implementation PhotosVC
 @synthesize place = _place;
 
+#pragma mark - Setup
+
 -(void) initialSetup{
     self.tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Photos Table"];
     self.mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Photos Map"];

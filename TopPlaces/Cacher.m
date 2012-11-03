@@ -12,6 +12,7 @@
 
 @implementation Cacher
 
+#pragma mark - Save to Sandbox
 
 +(NSURL*) photoUrlForKey:(NSString*)key isThumb:(BOOL)isThumb{
     NSString *pathComponent = isThumb ? @"thumb" : @"photos";
@@ -48,6 +49,8 @@
     NSFileManager *manager = [[NSFileManager alloc]init];
     [manager removeItemAtURL:[self photoUrlForKey:key isThumb:isThumb] error:nil];
 }
+
+#pragma mark - Save to NSUserDefaults
 
 +(void)savePicToRecentlyViewed:(NSDictionary*)photo{
     dispatch_queue_t defaultsQueue = dispatch_queue_create("save to defaults", NULL);
