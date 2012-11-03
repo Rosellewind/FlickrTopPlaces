@@ -7,6 +7,7 @@
 //
 
 #import "RecentPhotosTVC.h"
+#import "PhotoVC.h"
 
 @interface RecentPhotosTVC ()
 @end
@@ -16,6 +17,20 @@
 
 -(void)savePicToRecentlyViewed:(NSDictionary*)photo{
 //empty to override
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.splitViewController){
+        id vc = [self.splitViewController.viewControllers lastObject];
+        if ([vc isKindOfClass:[PhotoVC class]]){
+            [self prepareVC:vc];
+            [vc loadImage];
+        }
+    }
+    else {//else not needed in ios6, nor didSelectRowAtIndexPath if else not in super
+        [self performSegueWithIdentifier:@"recent table to photo" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
 }
 
 @end

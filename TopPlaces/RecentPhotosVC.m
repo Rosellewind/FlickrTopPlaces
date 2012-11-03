@@ -15,10 +15,7 @@
 @end
 
 @implementation RecentPhotosVC
-
--(void) viewDidLoad{
-    [super viewDidLoad];
-    [self setData];
+-(void) initialSetup{
     self.tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Recent Table"];
     self.mvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Recent Map"];
     [self addChildViewController:self.tvc];

@@ -10,7 +10,7 @@
 #import "FlickrFetcher.h"
 #import "PhotoVC.h"
 #import "FlickrPhotoAnnotation.h"
-#import "PhotosVC.h"
+//#import "PhotosVC.h"
 #import "Cacher.h"
 
 #define MAX_RESULTS 50
@@ -28,7 +28,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"pictures";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell  alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+
+//ios6    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell) cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"places"];
     NSDictionary *photo = [self.tableData objectAtIndex:indexPath.row];
     NSString *title = [photo objectForKey:@"title"];
@@ -92,6 +94,9 @@
             [vc loadImage];
         }
     }
+    else {//else not needed in ios6
+        [self performSegueWithIdentifier:@"table to photo" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
 }
 
 
@@ -115,8 +120,7 @@
 -(void)prepareVC:(PhotoVC*)vc{
     NSIndexPath *index= [self.tableView indexPathForSelectedRow];
     NSDictionary *photo = [self.tableData objectAtIndex:index.row];
-    [PhotosVC savePicToRecentlyViewed:photo];
-//    [self savePicToRecentlyViewed:photo];
+    [Cacher savePicToRecentlyViewed:photo];
     vc.photo = photo;
     vc.description = [[[self.tableView cellForRowAtIndexPath:index]textLabel]text];
 }

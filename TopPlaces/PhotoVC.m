@@ -39,7 +39,7 @@
 
 -(void)loadImage{
     NSString *key = [self.photo objectForKey:@"id"];
-    
+    NSDictionary *photo = self.photo;
     //show spinner while getting photo
     [self.spinner startAnimating];
     
@@ -55,13 +55,15 @@
         dispatch_queue_t downloadQueue = dispatch_queue_create("flickr image downloader", NULL);
         dispatch_async(downloadQueue, ^{
 //            NSLog(@"fetching: loadImage");
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatLarge]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.spinner stopAnimating];
-                self.imageView.image = image;
-                [self prepareImage];
-            });
-            
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge]]];
+            if (photo == self.photo){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.spinner stopAnimating];
+                        self.imageView.image = image;
+                        [self prepareImage];
+                });
+            }
+
             //manage cache
             [self.cachedPhotos insertObject:key atIndex:0];
             if ([Cacher isOverLimitIsThumb:NO]){

@@ -26,4 +26,5 @@
     }
     else [self performSegueWithIdentifier:@"recent map to photo" sender:view];
 }
+
 @end

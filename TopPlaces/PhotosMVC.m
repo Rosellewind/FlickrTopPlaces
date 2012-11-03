@@ -11,7 +11,7 @@
 #import "FlickrFetcher.h"
 #import "PhotoVC.h"
 #import "Cacher.h"
-#import "PhotosVC.h"
+//#import "PhotosVC.h"
 
 
 @interface PhotosMVC ()
@@ -135,7 +135,7 @@
     NSDictionary *photo = [(FlickrPhotoAnnotation*)[(MKAnnotationView*)view annotation] photo];
 
 
-    [PhotosVC savePicToRecentlyViewed:photo];
+    [Cacher savePicToRecentlyViewed:photo];
     vc.photo = photo;
     vc.description =[(FlickrPhotoAnnotation*)view.annotation title];
 }

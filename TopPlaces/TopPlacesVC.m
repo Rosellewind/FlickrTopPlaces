@@ -11,8 +11,6 @@
 #import "TopPlacesTVC.h"
 #import "TopPlacesMVC.h"
 
-
-
 @interface TopPlacesVC ()
 
 @end
@@ -91,13 +89,13 @@
 - (IBAction)choseView:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 0) {
         self.tvc.tableData = self.dataArray;
-        [self transitionFromViewController:(UIViewController*)self.mvc toViewController:(UIViewController*)self.tvc duration:1.0 options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionCurveEaseIn animations:^{} completion:^(BOOL finished){
+        [self transitionFromViewController:(UIViewController*)self.mvc toViewController:(UIViewController*)self.tvc duration:0.5 options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionCurveEaseIn animations:^{} completion:^(BOOL finished){
             self.isUsingMapOrTable = USING_TABLE;
         }];
     }
     else{
         self.mvc.mapData = self.dataArray;
-        [self transitionFromViewController:(UIViewController*)self.tvc toViewController:(UIViewController*)self.mvc duration:1.0 options:UIViewAnimationOptionTransitionFlipFromRight | UIViewAnimationOptionCurveEaseIn animations:^{} completion:^(BOOL finished){
+        [self transitionFromViewController:(UIViewController*)self.tvc toViewController:(UIViewController*)self.mvc duration:0.5 options:UIViewAnimationOptionTransitionFlipFromRight | UIViewAnimationOptionCurveEaseIn animations:^{} completion:^(BOOL finished){
             self.isUsingMapOrTable = USING_MAP;
         }];
     }

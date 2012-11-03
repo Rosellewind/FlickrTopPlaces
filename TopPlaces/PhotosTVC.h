@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "TopPlacesTVC.h"
+@class PhotoVC;
 
 @interface PhotosTVC : TopPlacesTVC
 @property (nonatomic, strong) NSDictionary *place;
+
+//prepareVC not needed in ios6
+-(void)prepareVC:(PhotoVC*)vc;
+
 @end

@@ -15,4 +15,7 @@
 +(BOOL)isOverLimitIsThumb:(BOOL)isThumb;
 +(void)removeCacheForKey:(NSString*)key isThumb:(BOOL)isThumb;
 
+//save to nsuserdefaults
++(void)savePicToRecentlyViewed:(NSDictionary*)photo;
+
 @end

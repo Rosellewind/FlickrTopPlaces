@@ -8,7 +8,7 @@
 
 #import "PhotosMVC.h"
 
-@interface RecentPhotosMVC : PhotosMVC
+@interface RecentPhotosMVC : PhotosMVC<MKMapViewDelegate>
 
 
 @end

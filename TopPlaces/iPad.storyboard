@@ -225,7 +225,7 @@
                             </segmentedControl>
                             <containerView contentMode="scaleToFill" id="MpM-dP-GQM">
                                 <rect key="frame" x="0.0" y="28" width="320" height="760"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </containerView>
                         </subviews>
@@ -349,9 +349,9 @@
         <!--Recent PhotosTVC - Recently Viewed Pictures-->
         <scene sceneID="bhK-kC-FSe">
             <objects>
-                <tableViewController storyboardIdentifier="Recent Table" clearsSelectionOnViewWillAppear="NO" id="any-6W-3la" customClass="RecentPhotosTVC" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Recent Table" wantsFullScreenLayout="YES" clearsSelectionOnViewWillAppear="NO" id="any-6W-3la" customClass="RecentPhotosTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LLV-bw-tx4">
-                        <rect key="frame" x="0.0" y="20" width="320" height="832"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -385,6 +385,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recently Viewed Pictures" id="Nud-ER-Rfm"/>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9t-bj-T10" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -447,7 +448,7 @@
                             </segmentedControl>
                             <containerView contentMode="scaleToFill" id="qYm-9M-Gb5">
                                 <rect key="frame" x="0.0" y="28" width="320" height="760"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </containerView>
                         </subviews>
@@ -500,10 +501,10 @@
             </objects>
             <point key="canvasLocation" x="2593" y="-2439"/>
         </scene>
-        <!--Top PlacesVC - Recently Viewed-->
+        <!--Recent PhotosVC - Recently Viewed-->
         <scene sceneID="poa-yP-Pxl">
             <objects>
-                <viewController storyboardIdentifier="Recent" id="ABt-yK-MdS" customClass="TopPlacesVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Recent" id="ABt-yK-MdS" customClass="RecentPhotosVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wbF-Oq-s7e">
                         <rect key="frame" x="0.0" y="64" width="320" height="788"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -522,37 +523,29 @@
                             </segmentedControl>
                             <containerView contentMode="scaleToFill" id="PIK-sG-Llr">
                                 <rect key="frame" x="0.0" y="28" width="320" height="760"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Recently Viewed" id="SOF-RR-f2A">
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="jzm-mS-GI2">
-                            <connections>
-                                <action selector="refresh:" destination="ABt-yK-MdS" id="Qdk-20-Ey5"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Recently Viewed" id="SOF-RR-f2A"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="containerView" destination="PIK-sG-Llr" id="XQa-oq-bfL"/>
                         <outlet property="mapOrTableControl" destination="XgK-BQ-bEc" id="R2a-xz-rEM"/>
-                        <outlet property="refreshButton" destination="jzm-mS-GI2" id="jiR-Bt-veJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dew-Zf-RV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1156" y="1008"/>
         </scene>
-        <!--Top PlacesMVC-->
+        <!--Recent PhotosMVC-->
         <scene sceneID="xFV-it-Yb8">
             <objects>
-                <viewController storyboardIdentifier="Recent Map" wantsFullScreenLayout="YES" id="wdE-NB-x0H" customClass="TopPlacesMVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Recent Map" wantsFullScreenLayout="YES" id="wdE-NB-x0H" customClass="RecentPhotosMVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yjY-gA-Cph">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -567,7 +560,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="mapView" destination="JnS-7W-NT6" id="ESH-G1-Mav"/>
+                        <outlet property="mapView" destination="JnS-7W-NT6" id="Pyj-rm-A6i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ay-Bq-i0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -595,8 +588,14 @@
         <class className="PhotosVC" superclassName="TopPlacesVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosVC.h"/>
         </class>
+        <class className="RecentPhotosMVC" superclassName="PhotosMVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotosMVC.h"/>
+        </class>
         <class className="RecentPhotosTVC" superclassName="PhotosTVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotosTVC.h"/>
+        </class>
+        <class className="RecentPhotosVC" superclassName="TopPlacesVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotosVC.h"/>
         </class>
         <class className="TopPlacesMVC" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesMVC.h"/>
@@ -624,6 +623,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hvt-Me-E1b"/>
+        <segue reference="C7C-MJ-79T"/>
     </inferredMetricsTieBreakers>
 </document>
